@@ -3,6 +3,7 @@ import CircleBackground from '../../components/circle-background/CircleBackgroun
 import './home.css'
 import logo from '../../assets/images/kuizu-logo.png'
 import Button from '../../components/button/Button'
+import GoogleLogin from '../../components/google-login/google-login'
 
 const Home = () => {
   return (
@@ -11,7 +12,7 @@ const Home = () => {
             <img id='home__img-logo' src={logo} alt='logo.img'></img>
             <div id='home__login-options'>
                 <h1>Inicia Sesion</h1>
-                <Button />
+                <GoogleLogin/>
             </div>
         </div>
         <CircleBackground />
