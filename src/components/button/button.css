@@ -1,4 +1,4 @@
-a {
+.button {
     width: fit-content;
     height: fit-content;
     padding: 10px 35px;
@@ -16,20 +16,30 @@ a {
     transition: .3s ease-in-out;
 }
 
-a:hover {
+.button:hover {
     transform: scale(1.1);
 }
 
-a img {
+.button .button-image {
     height: 50px;
 }
 
 @media only screen and (max-width: 600px) {
-    a {
+    .button {
         font-size: 15px;
         padding: 10px 25px;
     }
-    a img {
+    .button .button-image {
         height: 30px;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .button {
+        font-size: 25px;
+        padding: 10px 25px;
+    }
+    .button .button-image {
+        height: 40px;
     }
 }

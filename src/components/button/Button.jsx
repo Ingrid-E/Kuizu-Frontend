@@ -4,7 +4,7 @@ import GoogleLogo from '../../assets/images/google-logo.png'
 
 const Button = () => {
   return (
-    <a href="#"><img src={GoogleLogo} alt='google-logo.png'></img>Ingresa con google</a>
+    <a className='button' href="#"><img className='button-image' src={GoogleLogo} alt='google-logo.png'></img>Ingresa con google</a>
   )
 }
 
