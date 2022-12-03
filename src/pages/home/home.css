@@ -50,7 +50,7 @@
     }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (min-width: 600px) and (max-width: 900px) {
     #home__content {
         width: 70%;
         row-gap: 50px;
