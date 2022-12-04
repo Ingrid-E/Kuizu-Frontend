@@ -1,5 +1,5 @@
 const handleLogin = async(googleData)=>{
-    const res = await fetch('http://localhost:8000/user',{
+    const res = await fetch('user',{
         method: 'POST',
         body: JSON.stringify({
             token: googleData.credential,

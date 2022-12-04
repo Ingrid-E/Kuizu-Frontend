@@ -9,7 +9,7 @@ const Dashboard = () => {
         <div id='dashboard'>
             <h1>Bienvenido! {firstname+" "+lastname}</h1>
             <h2>Correo: {email}</h2>
-            <img src={imgurl}></img>
+            <img src={imgurl} alt="User profile"></img>
         </div>
     )
 }

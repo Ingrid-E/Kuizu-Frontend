@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 import handleLogin from '../../hooks/google-login-hook';
 import { useNavigate } from "react-router-dom";
 import './google-login.css'
