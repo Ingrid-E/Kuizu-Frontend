@@ -1,47 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import handleLogin from '../../hooks/google-login-hook';
+import { useNavigate } from "react-router-dom";
+import './google-login.css'
 
 
-function LoginGoogle() {
-    const [user, setUser] = useState({})
-
-    useEffect(()=>{}, user)
-
-    const handleLogin = async(googleData)=>{
-        console.log(googleData)
-        const res = await fetch('http://localhost:8000/user',{
-            method: 'POST',
-            body: JSON.stringify({
-                token: googleData.credential,
-            }),
-            headers: {
-                'Content-Type':'application/json',
-                'Access-Control-Allow-Origin': '*'
+function LoginGoogle({navigate}) {
+    const nav = useNavigate();
+    useEffect(()=>{
+        window.google.accounts.id.initialize({
+            client_id: process.env.REACT_APP_CLIENT_ID,
+            callback: async (response)=>{
+               const res = await handleLogin(response)
+               console.log(res)
+               if(res.success){
+                const user = res.data.user
+                nav(navigate, {state: user})
+               }
             }
-        })
-        const userData = await res.json()
-        console.log(userData.data.user)
-        setUser(userData.data.user);
-    }
-    
+        });
+        window.google.accounts.id.renderButton(
+            document.getElementById("signInDiv"),
+            {theme: "outline", size: "large", shape:"pill"}
+        )
+    }, [])
+
     return (
-        <div className='google-login'>
-            <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
-                <GoogleLogin
-                    onSuccess={credentialResponse => {
-                        console.log("Iniciando");
-                        handleLogin(credentialResponse)
-                    }}
-                    onError={() => {
-                        console.log('Login Failed');
-                    }}
-                />
-            </GoogleOAuthProvider>
-            <h1>Nombre: {user.firstname}</h1>
-            <h1>Apellido: {user.lastname}</h1>
-            <h1>Correo: {user.email}</h1>
-            <h1>Foto perfil:</h1>
-            <img src={user.imgurl}></img>
+        <div className='login-google'>
+            <div id="signInDiv">Hola</div>
         </div>
     )
 }
