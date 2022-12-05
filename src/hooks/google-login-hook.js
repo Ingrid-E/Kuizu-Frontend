@@ -1,5 +1,5 @@
 const handleLogin = async(googleData)=>{
-    const res = await fetch(process.env.REACT_USER_MICRO+'/user',{
+    const res = await fetch(process.env.REACT_APP_USER_MICRO+'/user',{
         method: 'POST',
         body: JSON.stringify({
             token: googleData.credential,
