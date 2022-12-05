@@ -5,8 +5,7 @@ const handleLogin = async(googleData)=>{
             token: googleData.credential,
         }),
         headers: {
-            'Content-Type':'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Content-Type':'application/json'
         }
     })
     const userData = await res.json()
