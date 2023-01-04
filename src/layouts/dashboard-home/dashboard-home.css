@@ -1,0 +1,30 @@
+.dashboard-home {
+    width: auto;
+    height: 100vh;
+    max-height: 100vh;
+    position: relative;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.sections {
+    width: 100%;
+    display: flex;
+    column-gap: 20px;
+    row-gap: 20px;
+    flex: 1;
+}
+
+@media (max-width: 600px) {
+    .dashboard-home {
+        height: auto;
+    }
+
+    .sections {
+        flex-direction: column;
+    }
+}
