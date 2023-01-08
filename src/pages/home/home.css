@@ -33,19 +33,13 @@
     row-gap: 20px;
 }
 
-#home__content h1 {
-    font-size: 34px;
-    font-family: 'Quicksand';
-    color: #404462;
-}
-
 @media only screen and (max-width: 600px) {
     #home__content {
         width: 90%;
         row-gap: 50px;
     }
 
-    #home__content h1 {
+    #home__content h2 {
         font-size: 24px;
     }
 }
@@ -56,7 +50,7 @@
         row-gap: 50px;
     }
 
-    #home__content h1 {
+    #home__content h2 {
         font-size: 30px;
     }
 }
