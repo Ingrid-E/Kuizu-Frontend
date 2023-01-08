@@ -10,7 +10,7 @@ const Home = () => {
             <img id='home__img-logo' src={logo} alt='logo.img'></img>
             <div id='home__login-options'>
                 <h2>Inicia Sesion</h2>
-                <LoginGoogle navigate="/dashboard"/>
+                <LoginGoogle navigate="/login-as"/>
             </div>
         </div>
         <CircleBackground />
