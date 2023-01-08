@@ -1,0 +1,6 @@
+.line-rule {
+    width: auto;
+    height: 1.5px !important;
+    background-color: #404462;
+    opacity: .35;
+}

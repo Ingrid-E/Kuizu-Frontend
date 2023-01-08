@@ -1,0 +1,18 @@
+.dashboard-heading {
+    width: auto;
+    height: fit-content;
+    display: flex;
+    color: #404462;
+    align-items: flex-end;
+    column-gap: 5px;
+}
+
+.dashboard-heading-title-normal {
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.dashboard-heading-title-bold {
+    line-height: 1;
+    font-weight: 600;
+}
