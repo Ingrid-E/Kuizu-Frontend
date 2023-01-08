@@ -9,7 +9,7 @@ const Home = () => {
         <div id='home__content'>
             <img id='home__img-logo' src={logo} alt='logo.img'></img>
             <div id='home__login-options'>
-                <h1>Inicia Sesion</h1>
+                <h2>Inicia Sesion</h2>
                 <LoginGoogle navigate="/dashboard"/>
             </div>
         </div>
