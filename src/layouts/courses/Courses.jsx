@@ -7,7 +7,7 @@ const Courses = () => {
 
   return (
     <div className='courses'>
-        <h4>Cursos</h4>
+        <h4 className='header'>Cursos</h4>
         <div className='courses-content'>
             <CourseCard courseName='Programacion Orientada a Objetos' image={img} />
             <CourseCard courseName='Programacion Orientada a Objetos' image={img} />

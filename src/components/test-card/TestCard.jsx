@@ -6,7 +6,7 @@ const TestCard = ({ data, type }) => {
   if ((type == "filled")) {
     return (
       <a className="test-card" href="">
-        <CircleImage image={data.image} />
+        <CircleImage width='50px' height='50px' image={data.image} />
         <div className="test-card-data">
           <h3>{data.name}</h3>
           <div className="test-card-data-info">
@@ -23,7 +23,7 @@ const TestCard = ({ data, type }) => {
   if ((type == "graded")) {
     return (
       <a className="test-card" href="">
-        <CircleImage image={data.image} />
+        <CircleImage width='50px' height='50px' image={data.image} />
         <div className="test-card-data">
           <h3>{data.name}</h3>
           <div className="test-card-data-info">
@@ -39,7 +39,7 @@ const TestCard = ({ data, type }) => {
   }
   return (
     <div className="test-card">
-      <CircleImage image={data.image} />
+      <CircleImage width='50px' height='50px' image={data.image} />
       <div className="test-card-data">
         <h3>{data.name}</h3>
         <div className="test-card-data-info">

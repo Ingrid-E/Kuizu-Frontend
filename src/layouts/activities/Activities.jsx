@@ -14,7 +14,7 @@ const Activities = () => {
   return (
     <div className="activities">
       <div className="activities-unfilled">
-        <h4>Actividades pendientes</h4>
+        <h4 className="header">Actividades pendientes</h4>
         <div className="container">
           <div className="content">
             <TestCard data={test1} />
@@ -30,7 +30,7 @@ const Activities = () => {
         </div>
       </div>
       <div className="activities-filled">
-        <h4>Actividades entregadas</h4>
+        <h4 className="header">Actividades entregadas</h4>
         <div className="container">
           <div className="content">
             <TestCard  data={test1} type="filled" />

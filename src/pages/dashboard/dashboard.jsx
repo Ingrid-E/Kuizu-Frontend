@@ -1,14 +1,15 @@
 import React from 'react'
-import { DashboardHome, Navbar } from '../../layouts'
+import { DashboardExam, DashboardHome, Navbar } from '../../layouts'
+import DashboardCourse from '../../layouts/dashboard-course/DashboardCourse'
 import './dashboard.css'
 
-const dashboard = () => {
+const Dashboard = () => {
   return (
     <div className='dashboard'>
-        <Navbar />
-        <DashboardHome />
+        <Navbar username='Chris Harris' />
+        <DashboardExam />
     </div>
   )
 }
 
-export default dashboard
+export default Dashboard
