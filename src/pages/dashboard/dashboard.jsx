@@ -1,17 +1,15 @@
 import React from 'react'
-import { useLocation} from "react-router-dom";
+import { DashboardExam, DashboardHome, Navbar } from '../../layouts'
+import DashboardCourse from '../../layouts/dashboard-course/DashboardCourse'
 import './dashboard.css'
 
 const Dashboard = () => {
-    console.log(useLocation().state)
-    const {firstname, lastname, email, imgurl} = useLocation().state;
-    return (
-        <div id='dashboard'>
-            <h1>Bienvenido! {firstname+" "+lastname}</h1>
-            <h2>Correo: {email}</h2>
-            <img src={imgurl} alt="User profile"></img>
-        </div>
-    )
+  return (
+    <div className='dashboard'>
+        <Navbar username='Chris Harris' />
+        <DashboardExam />
+    </div>
+  )
 }
 
 export default Dashboard
