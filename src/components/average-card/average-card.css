@@ -1,0 +1,39 @@
+.average-card {
+  width: 150px;
+  min-width: 150px;
+  background-color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s ease-in-out;
+}
+
+.average-card:hover {
+  transform: scale(1.1);
+}
+
+.average-card-data {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.5px;
+  position: relative;
+  z-index: 1;
+}
+
+.average-card-data-title,
+.average-card-data-course {
+  color: #404462;
+}
+
+.average-card-circle {
+  height: 100px;
+  width: 100px;
+  background: #b2baff;
+  border-radius: 100%;
+  position: absolute;
+  right: -20%;
+  bottom: -50%;
+}

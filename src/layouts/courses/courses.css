@@ -1,0 +1,34 @@
+.courses {
+  width: calc(30% - 20px);
+  min-width: 350px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  flex-grow: 1;
+}
+
+.courses-content {
+  width: auto;
+  background-color: #ffffff;
+  flex: 1;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  position: relative;
+  overflow: auto;
+  flex-basis: 0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 600px) {
+  .courses {
+    width: 100%;
+  }
+
+  .courses-content {
+    flex-basis: 265px;
+  }
+}
