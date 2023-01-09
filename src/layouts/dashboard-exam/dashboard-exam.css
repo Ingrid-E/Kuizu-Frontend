@@ -1,4 +1,4 @@
-.dashboard-home {
+.dashboard-exam {
     width: auto;
     height: 100vh;
     max-height: 100vh;
@@ -11,20 +11,9 @@
     overflow-y: auto;
 }
 
-.sections {
-    width: 100%;
-    display: flex;
-    column-gap: 20px;
-    row-gap: 20px;
-    flex: 1;
-}
-
 @media (max-width: 600px) {
-    .dashboard-home {
+    .dashboard-exam {
         height: auto;
-    }
-
-    .sections {
-        flex-direction: column;
+        padding: 20px;
     }
 }

@@ -1,0 +1,15 @@
+.exam-info {
+  min-width: 350px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  flex: 1;
+}
+
+.exam-info-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  row-gap: 10px;
+}

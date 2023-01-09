@@ -6,7 +6,7 @@ const CourseCard = ({courseName, image}) => {
 
   return (
     <a href='' className='course-card'>
-        <CircleImage style={{width: '60px', height: '60px', minHeight: '60px', minWidth: '60px'}} image={image} />
+        <CircleImage width='60px' height='60px'image={image} />
         <h2 className='course-card-name'>{courseName}</h2>
     </a>
   )

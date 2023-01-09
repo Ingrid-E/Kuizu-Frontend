@@ -1,0 +1,12 @@
+.dashboard-course {
+    width: auto;
+    height: 100vh;
+    max-height: 100vh;
+    position: relative;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}

@@ -1,14 +1,18 @@
 import React from 'react'
 import './circle-image.css'
 
-const CircleImage = ({ style, image}) => {
+const CircleImage = ({ width, height, image}) => {
 
-  const imageUrl = {
-    backgroundImage: `url(${image})`
+  const styles = {
+    backgroundImage: `url(${image})`,
+    width: `${width}`,
+    height: `${height}`,
+    minWidth: `${width}`,
+    minHeight: `${height}`
   };
 
   return (
-    <a className='circle-image' style={imageUrl} href=""></a>
+    <a className='circle-image' style={styles} href=""></a>
   )
 }
 
