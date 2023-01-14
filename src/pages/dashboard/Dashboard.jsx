@@ -3,7 +3,7 @@ import { DashboardHome, Navbar } from '../../layouts'
 import {useLocation} from 'react-router-dom';
 import './dashboard.css'
 
-const dashboard = () => {
+const Dashboard = () => {
   const user = useLocation().state.user
   return (
     <div className='dashboard'>
