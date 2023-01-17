@@ -1,0 +1,146 @@
+.creation-card {
+    position: absolute;
+    background-color: #8A96FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.creation-card-title {
+    color: #FFFFFF;
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.creation-card-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    width: 100%;
+}
+
+.creation-card-form-area {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+}
+
+.creation-card-form-area-title {
+    color: #FFFFFF;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.creation-card-form-area-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.creation-card-form-area-subtitle {
+    color: #FFFFFF;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.creation-card-form-button {
+    width: 100%;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 5px 3px rgba(0, 0, 0, .25);
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    padding: 10px 0px;
+    margin-top: 10px;
+    transition: .3s ease-in-out;
+    cursor: pointer;
+}
+
+.creation-card-form-button:hover {
+    transform: scale(1.025);
+}
+
+.creation-card-exam-name {
+    color: #FFFFFF;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.creation-card-form-button-add {
+    width: auto;
+    background-color: transparent;
+    border-radius: 10px;
+    border: solid 2px #FFFFFF;
+    padding: 10px 0px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #FFFFFF;
+    transition: .3s ease-in-out;
+    cursor: pointer;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.creation-card-form-button-add:hover {
+    transform: scale(1.015);
+}
+
+.creation-card-form-area-option-list {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    list-style: lower-alpha;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #FFFFFF;
+    row-gap: 10px;
+    overflow-y: auto;
+    max-height: 200px;
+}
+
+.creation-card-form-area-option-list-option{
+    width: 85%;
+}
+
+.creation-card-form-area-option-list-option-content{
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+}
+
+.creation-card-form-area-option-list-option-content-check label{
+    font-size: 1.1rem;
+}
+
+.creation-card-form-area-input-checkbox {
+    appearance: none;
+    background-color: #FFFFFF;
+	
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, .7);
+	padding: 8px;
+	border-radius: 100%;
+	display: inline-block;
+	position: relative;
+    margin-left: 10px;
+}
+
+.creation-card-form-area-input-checkbox:active, .creation-card-form-area-input-checkbox:checked:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.creation-card-form-area-input-checkbox:checked {
+	background-color: #6BC06D;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	color: #99a1a7;
+}

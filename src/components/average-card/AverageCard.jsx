@@ -1,9 +1,9 @@
 import React from "react";
 import "./average-card.css";
 
-const AverageCard = ({ style, average, courseName }) => {
+const AverageCard = ({ average, courseName }) => {
   return (
-    <a className="average-card" href="" style={style}>
+    <a className="average-card" href="">
       <div className="average-card-data">
         <h1 className="average-card-data-title">{average}</h1>
         <p className="average-card-data-course">{courseName}</p>

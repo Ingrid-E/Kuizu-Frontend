@@ -4,15 +4,19 @@ import "./question-card.css";
 
 const QuestionCard = () => {
 
-    const [changeClass, setChangeClass] = useState('question-card')
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = e => {
+    setIsActive(current => !current);
+  }
 
   return (
-    <div className={changeClass}>
+    <div className={isActive ? 'question-card active' : 'question-card'}>
       <div className="question-card-header">
-        <h1 className="question-card-header-title" onClick={() => changeClass == 'question-card' ? setChangeClass('question-card active') : setChangeClass('question-card')}>Pregunta 1</h1>
+        <h4 className="question-card-header-title">Pregunta 1</h4>
         <div className="question-card-header-buttons">
-          <CircleButton />
-          <CircleButton />
+          <button className="question-card-header-buttons-button">a</button>
+          <button className="question-card-header-buttons-button" onClick={handleClick}>a</button>
         </div>
       </div>
       <div className="question-card-content">
