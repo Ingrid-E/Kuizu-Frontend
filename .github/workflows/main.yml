@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - develop
+      - feature/tests
   pull_request:
     branches:
       -main
@@ -24,6 +25,8 @@ jobs:
     - run: npm test
     
   my_job:
+    needs: [build]
+    name: Google Hook
     runs-on: ubuntu-latest
 
     steps:
