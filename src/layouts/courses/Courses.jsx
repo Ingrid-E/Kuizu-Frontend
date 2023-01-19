@@ -9,11 +9,11 @@ const Courses = () => {
     <div className='courses'>
         <h4 className='header'>Cursos</h4>
         <div className='courses-content'>
-            <CourseCard courseName='Programacion Orientada a Objetos' image={img} />
-            <CourseCard courseName='Programacion Orientada a Objetos' image={img} />
-            <CourseCard courseName='Programacion Orientada a Objetos' image={img} />
-            <CourseCard courseName='Programacion Orientada a Objetos' image={img} />
-            <CourseCard courseName='Programacion Orientada a Objetos' image={img} />
+            <CourseCard courseName='Quimica Molecular Avanzada' image={img} />
+            <CourseCard courseName='Arquitectura de Computadores' image={img} />
+            <CourseCard courseName='Matematicas Discretas II' image={img} />
+            <CourseCard courseName='Ingles 4' image={img} />
+            <CourseCard courseName='Sistemas Operativos' image={img} />
             <CourseCard courseName='Programacion Orientada a Objetos' image={img} />
         </div>
     </div>

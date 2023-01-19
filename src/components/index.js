@@ -12,3 +12,4 @@ export { default as QuestionCard } from "./question-card/QuestionCard";
 export { default as CircleButton } from "./circle-button/CircleButton";
 export { default as TitleCard } from "./title-card/TitleCard";
 export { default as DateInfoCard} from "./date-info-card/DateInfoCard";
+export { default as CreationCard } from "./creation-card/CreationCard";

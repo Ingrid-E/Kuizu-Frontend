@@ -1,48 +1,58 @@
 .menu-button {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    row-gap: 10px;
-    position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
 }
 
-.menu-button-line {
-    height: 5px;
-    background-color: #8A96FF;
-    border-radius: 20px;
-    transition: .5s ease-in-out;
+.menu-button .menu-button-line {
+  position: relative;
+  height: 5px;
+  width: 100%;
+  background-color: #8a96ff;
+  border-radius: 20px;
+  overflow: visible;
+  transition: 0.3s ease-in-out;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.menu-button-line:nth-child(1) {
-    width: 90%;
+.menu-button .menu-button-line::before {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  background-color: #8a96ff;
+  border-radius: 20px;
+  top: -300%;
+  transition: inherit;
 }
 
-.menu-button-line:nth-child(2) {
-    width: 75%;
+.menu-button .menu-button-line::after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  background-color: #8a96ff;
+  border-radius: 20px;
+  bottom: -300%;
+  transition: inherit;
 }
 
-.menu-button-line:nth-child(3) {
-    width: 60%;
+.menu-button.active .menu-button-line {
+  background-color: transparent;
 }
 
-.menu-button:hover {
-    align-items: center;
+.menu-button.active .menu-button-line::before {
+  top: 0;
+  transform: rotate(-45deg);
+  transition-delay: .3s;
 }
 
-.menu-button:hover .menu-button-line:nth-child(1) {
-    transform: rotate(-45deg);
-    position: absolute;
-}
-
-.menu-button:hover .menu-button-line:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-button:hover .menu-button-line:nth-child(3) {
-    width: 90%;
-    transform: rotate(45deg);
-    position: absolute;
+.menu-button.active .menu-button-line::after {
+  bottom: 0;
+  transform: rotate(45deg);
+  transition-delay: .3s;
 }
