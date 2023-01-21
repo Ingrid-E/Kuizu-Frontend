@@ -11,7 +11,7 @@ const Dashboard = ({ window }) => {
       <div className='dashboard'>
           <Navbar user_img = {user.imgurl} firstname={user.firstname} lastname={user.lastname}/>
           <SideBar user_img = {user.imgurl} firstname={user.firstname} lastname={user.lastname} rol={user.type}/>
-          <DashboardHome/>
+          <DashboardHome user_type={user.type} user_type_id= {user.type_id}/>
          
       </div>
     )
@@ -21,7 +21,7 @@ const Dashboard = ({ window }) => {
       <div className='dashboard'>
           <Navbar user_img = {user.imgurl} firstname={user.firstname} lastname={user.lastname}/>
           <SideBar user_img = {user.imgurl} firstname={user.firstname} lastname={user.lastname} rol={user.type}/>
-          <DashboardCourse />
+          <DashboardCourse/>
       </div>
     )
   }

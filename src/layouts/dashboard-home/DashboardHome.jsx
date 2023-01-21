@@ -4,13 +4,13 @@ import Courses from '../courses/Courses'
 import DashboardAverages from '../dashboard-averages/DashboardAverages'
 import './dashboard-home.css'
 
-const DashboardHome = () => {
+const DashboardHome = ({user_type, user_type_id}) => {
   return (
     <div className='dashboard-home'>
       <DashboardAverages />
       <div className='sections'>
         <Activities />
-        <Courses />
+        <Courses type={user_type} type_id={user_type_id}/>
       </div>
     </div>
   )

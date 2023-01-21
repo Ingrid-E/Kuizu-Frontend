@@ -1,21 +1,37 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import CircleImage from "../circle-image/CircleImage";
 import "./user-info-card.css";
+import { getUserInfo } from "../../hooks/course-hooks";
 
-const UserInfoCard = ({ name }) => {
+const UserInfoCard = ({name, type_id, type}) => {
+
+  const [user, setUser] = useState({firstname:"---", lastname:"---", imgurl:""})
+
+  useEffect(()=>{
+    handleUserInfo(type, type_id)
+  }, [])
+
+  const handleUserInfo= async(type, type_id)=>{
+    const userResponse = await getUserInfo(type, type_id)
+    console.log(userResponse.data.user)
+    setUser(userResponse.data.user)
+  }
+
+
+
   return (
     <div className="user-info-card">
       <CircleImage
           image={
-            "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+           user.imgurl === ""? "":user.imgurl
           }
           width='125px'
           height='125px'
         />
       <div className="user-info-card-data">
         <div ></div>
-        <h3 className="user-info-card-data-title">Docente</h3>
-        <h2 className="user-info-card-data-name">{name}</h2>
+        <h3 className="user-info-card-data-title">{type === "teacher"? "Docente":"Estudiante"}</h3>
+        <h2 className="user-info-card-data-name">{user.firstname} {user.lastname != undefined? user.lastname:""}</h2>
       </div>
       <div className="user-info-card-circle"></div>
       <div className="user-info-card-circle"></div>

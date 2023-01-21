@@ -1,8 +1,16 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { LineRule, TestCard } from "../../components";
+import { getCourseActivities } from "../../hooks/course-hooks";
 import "./activities.css";
 
-const Activities = () => {
+const Activities = ({course_id, course_name}) => {
+
+  const [activities, setActivities] = useState([{}])
+
+  useEffect(()=>{
+    listActivities(course_id)
+  }, [])
+
   const test1 = {
     name: "Animales Salvajes",
     course: "Biologia",
@@ -11,21 +19,40 @@ const Activities = () => {
     grade: 4.8,
   };
 
+  const listActivities = async(course_id)=>{
+    const activitiesData = await getCourseActivities(course_id)
+    const activitiesList = await activitiesData.data.data
+    activitiesList.forEach(activity => {
+      activity.course_name = course_name
+    });
+    setActivities(activitiesList)
+  }
+
+  const activitiesUnfilled = activities
+  .filter(activities => activities.state != "finished")
+  .map(activity =>
+    <div>
+      <TestCard data={activity}/>
+      <LineRule />
+    </div>
+  )
+
+  const activitiesFilled = activities
+  .filter(activities => activities.state == "finished")
+  .map(activity =>
+    <div>
+      <TestCard data={activity}/>
+      <LineRule />
+    </div>
+  )
+
   return (
     <div className="activities">
       <div className="activities-unfilled">
         <h4 className="header">Actividades pendientes</h4>
         <div className="container">
           <div className="content">
-            <TestCard data={test1} />
-            <LineRule />
-            <TestCard data={test1} />
-            <LineRule />
-            <TestCard data={test1} />
-            <LineRule />
-            <TestCard data={test1} />
-            <LineRule />
-            <TestCard data={test1} />
+            {activitiesUnfilled}
           </div>
         </div>
       </div>
@@ -33,13 +60,7 @@ const Activities = () => {
         <h4 className="header">Actividades entregadas</h4>
         <div className="container">
           <div className="content">
-            <TestCard  data={test1} type="filled" />
-            <LineRule />
-            <TestCard type="graded"  data={test1} />
-            <LineRule />
-            <TestCard type="graded"  data={test1} />
-            <LineRule />
-            <TestCard type="filled"  data={test1} />
+            {activitiesFilled}
           </div>
         </div>
       </div>

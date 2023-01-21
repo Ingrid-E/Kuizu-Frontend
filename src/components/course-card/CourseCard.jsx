@@ -3,19 +3,19 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import CircleImage from '../circle-image/CircleImage'
 import './course-card.css'
 
-const CourseCard = ({courseName, image}) => {
+const CourseCard = ({course, image}) => {
 
   const nav = useNavigate();
   const user = useLocation().state.user
 
   function handleClick() {
-    nav('/dashboard-course', {state: {user: user, name: courseName}});
+    nav('/dashboard-course', {state: {user: user, course: course}});
   }
 
   return (
     <a href='' className='course-card' onClick={handleClick}>
         <CircleImage width='60px' height='60px'image={image} />
-        <h2 className='course-card-name'>{courseName}</h2>
+        <h2 className='course-card-name'>{course.name}</h2>
     </a>
   )
 }

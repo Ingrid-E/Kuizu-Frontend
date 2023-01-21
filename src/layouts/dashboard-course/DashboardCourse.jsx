@@ -7,14 +7,15 @@ import "./dashboard-course.css";
 
 const DashboardCourse = () => {
 
-  const nameCourse = useLocation().state.name
+  const course = useLocation().state.course
+  console.log(course)
 
   return (
     <div className="dashboard-home">
-      <CourseBar text={nameCourse} />
+      <CourseBar text={course.name} />
       <div className="sections">
-        <Activities />
-        <CourseInfo />
+        <Activities course_id = {course._id} course_name={course.name}/>
+        <CourseInfo course= {course}/>
       </div>
     </div>
   );
