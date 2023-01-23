@@ -8,8 +8,10 @@ const UserInfoCard = ({name, type_id, type}) => {
   const [user, setUser] = useState({firstname:"---", lastname:"---", imgurl:""})
 
   useEffect(()=>{
-    handleUserInfo(type, type_id)
-  }, [])
+    if(type_id != -1){
+      handleUserInfo(type, type_id)
+    }
+  }, [type_id])
 
   const handleUserInfo= async(type, type_id)=>{
     const userResponse = await getUserInfo(type, type_id)

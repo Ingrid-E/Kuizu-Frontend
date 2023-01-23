@@ -7,6 +7,15 @@ export const getAllCourses = async()=>{
     return courseData
 }
 
+export const getCourseInfo = async(course_id)=>{
+    const res = await fetch(process.env.REACT_APP_DEV_MICRO+`course/${course_id}`,{
+        method: 'GET',
+        headers: {}
+    })
+    const courseData = await res.json()
+    return courseData
+}
+
 export const getUserTypeCourse = async(type, type_id)=>{
     const res = await fetch(process.env.REACT_APP_DEV_MICRO+`course/${type}/${type_id}`,{
         method: 'GET',
@@ -15,7 +24,6 @@ export const getUserTypeCourse = async(type, type_id)=>{
         }
     })
     const courseData = await res.json()
-    console.log("COURSE ID: " + courseData)
     return courseData
 }
 
@@ -54,18 +62,16 @@ export const getTeacherCoursesAverage = async(teacher_id)=>{
         }
     })
     const coursesData = await courses.json()
-    console.log("COURSE TEACHER AVG: ", coursesData)
     return coursesData
 }
 
-export const getCourseActivities = async(id_course)=>{
-    const activities = await fetch(process.env.REACT_APP_DEV_MICRO+`exam/course/${id_course}`,{
+export const getCourseAverage = async(course_id)=>{
+    const courses = await fetch(process.env.REACT_APP_DEV_MICRO+`course/average/${course_id}`,{
         method: 'GET',
         headers: {
             'Content-Type':'application/json'
         }
     })
-    const activitiesData = await activities.json()
-    console.log("ACTIVITIES AVG: ", activitiesData)
-    return activitiesData
+    const coursesData = await courses.json()
+    return coursesData
 }

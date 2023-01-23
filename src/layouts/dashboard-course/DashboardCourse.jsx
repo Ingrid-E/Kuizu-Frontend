@@ -1,21 +1,31 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import { useParams } from "react-router-dom";
+import { getCourseInfo } from "../../hooks/course-hooks";
 import Activities from "../activities/Activities";
 import CourseBar from "../course-bar/CourseBar";
 import CourseInfo from "../course-info/CourseInfo";
 import "./dashboard-course.css";
 
 const DashboardCourse = () => {
+  const {id_course } = useParams();
+  const [course, setCourse] = useState({name:"", average:0.0, id_teacher: -1, _id:""})
 
-  const course = useLocation().state.course
-  console.log(course)
+  useEffect(()=>{
+    handleCourseInfo(id_course)
+  }, [])
+
+  const handleCourseInfo = async (courseId)=>{
+   const courseData = await getCourseInfo(courseId)
+   console.log(courseData.data.course)
+   setCourse(courseData.data.course)
+  }
 
   return (
     <div className="dashboard-home">
-      <CourseBar text={course.name} />
+      <CourseBar text={course.name}/>
       <div className="sections">
-        <Activities course_id = {course._id} course_name={course.name}/>
-        <CourseInfo course= {course}/>
+        <Activities data={[course]} window={"course"}/>
+        <CourseInfo course={course}/>
       </div>
     </div>
   );

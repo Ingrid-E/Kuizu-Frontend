@@ -8,8 +8,10 @@ const CourseInfo = ({course}) => {
   const [average, setAverage] = useState(0)
 
   useEffect(()=>{
-    handleCourseAverag(course.id_teacher, course._id)
-  }, [])
+    if(course._id != ""){
+      handleCourseAverag(course.id_teacher, course._id)
+    }
+  }, [course])
 
   const handleCourseAverag =async(id_teacher, course_id)=>{
       const courseList = await getTeacherCoursesAverage(id_teacher)
