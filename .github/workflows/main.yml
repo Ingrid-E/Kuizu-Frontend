@@ -31,7 +31,7 @@ jobs:
     - run: npm test
     
   my_job:
-    needs: [build]
+    needs: [test]
     name: Alert 🤖
     runs-on: ubuntu-latest
 
