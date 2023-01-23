@@ -30,7 +30,8 @@ jobs:
     - uses: actions/checkout@v3
     - run: npm test
     
-  my_job:
+  alert:
+    if: ${{ always() }}
     needs: [test]
     name: Alert 🤖
     runs-on: ubuntu-latest
@@ -44,4 +45,3 @@ jobs:
         name: Build
         url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
         status: ${{ job.status }}
-      if: always()
