@@ -1,19 +1,34 @@
-import React from 'react'
-import Activities from '../activities/Activities'
-import CourseBar from '../course-bar/CourseBar'
-import CourseInfo from '../course-info/CourseInfo'
-import './dashboard-course.css'
+import React, {useEffect, useState} from "react";
+import { useParams } from "react-router-dom";
+import { getCourseInfo } from "../../hooks/course-hooks";
+import Activities from "../activities/Activities";
+import CourseBar from "../course-bar/CourseBar";
+import CourseInfo from "../course-info/CourseInfo";
+import "./dashboard-course.css";
 
 const DashboardCourse = () => {
-  return (
-    <div className='dashboard-home'>
-        <CourseBar text='Programacion Orientada a Objetos' />
-        <div className='sections'>
-            <Activities />
-            <CourseInfo />
-        </div>
-    </div>
-  )
-}
+  const {id_course } = useParams();
+  const [course, setCourse] = useState({name:"", average:0.0, id_teacher: -1, _id:""})
 
-export default DashboardCourse
+  useEffect(()=>{
+    handleCourseInfo(id_course)
+  }, [])
+
+  const handleCourseInfo = async (courseId)=>{
+   const courseData = await getCourseInfo(courseId)
+   console.log(courseData.data.course)
+   setCourse(courseData.data.course)
+  }
+
+  return (
+    <div className="dashboard-home">
+      <CourseBar text={course.name}/>
+      <div className="sections">
+        <Activities data={[course]} window={"course"}/>
+        <CourseInfo course={course}/>
+      </div>
+    </div>
+  );
+};
+
+export default DashboardCourse;

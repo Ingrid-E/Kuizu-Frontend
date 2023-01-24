@@ -4,7 +4,7 @@ import "./title-card.css";
 const TitleCard = ({ title }) => {
   return (
     <div className="title-card">
-      <h1 className="title-card-text">{title}</h1>
+      <h4 className="title-card-text">{title}</h4>
       <div className="title-card-circle"></div>
       <div className="title-card-circle"></div>
     </div>

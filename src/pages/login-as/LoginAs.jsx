@@ -6,6 +6,7 @@ import CircleBackground from '../../components/circle-background/CircleBackgroun
 import './login-as.css'
 import { handleGetUserType } from '../../hooks/google-login-hook';
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 
 const LoginAs = ({navigate}) => {
@@ -24,10 +25,9 @@ const LoginAs = ({navigate}) => {
         user.type_id = type_id.data.id_student;
 
       }
-      console.log(user)
-      nav(navigate, {state: {user:user}})
+      Cookies.set('user', JSON.stringify(user),  { httpOnly: false, sameSite: 'strict', secure: true})
+      nav(navigate)
     }
-
   }
 
   return (

@@ -2,10 +2,12 @@ import React from 'react'
 import { BackButton, CourseTitle } from '../../components'
 import'./course-bar.css'
 
-const CourseBar = ( { text }) => {
+const CourseBar = ( { text}) => {
   return (
     <div className='course-bar'>
-        <BackButton />
+      <div>
+      <BackButton />
+      </div>
         <CourseTitle title={text} />
     </div>
   )

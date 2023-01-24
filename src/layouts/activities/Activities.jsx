@@ -1,15 +1,54 @@
-import React from "react";
-import { LineRule, TestCard } from "../../components";
+import React, {useEffect, useState} from "react";
+import { LineRule, TestCard, LoadingSpinner} from "../../components";
+import { useNavigate } from "react-router-dom";
+import { getCourseActivities, updateExamState } from "../../hooks/exam-hooks";
 import "./activities.css";
 
-const Activities = () => {
-  const test1 = {
-    name: "Animales Salvajes",
-    course: "Biologia",
-    image:
-      "https://images.unsplash.com/photo-1474511320723-9a56873867b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80",
-    grade: 4.8,
-  };
+const Activities = ({data, window}) => {
+  const [loading, setLoading] = useState(false)
+  const [activities, setActivities] = useState([])
+  useEffect(()=>{
+    listActivities(data)
+  }, [data])
+  const navigate = useNavigate();
+
+
+  const listActivities = async(data)=>{
+    let allActivities = []
+    setLoading(true)
+    await Promise.all(data.map(async (course)=>{
+      if(course._id != ""){
+        await updateExamState(course._id)
+        const courseActivities = await getCourseActivities(course._id)
+        const courseActivitiesData = courseActivities.data.data 
+        courseActivitiesData.forEach(activity => {
+          activity.course_name = course.name
+          allActivities.push(activity)
+        })
+      }
+    }))
+    setLoading(false)
+    setActivities(allActivities)
+  }
+
+
+  const activitiesUnfilled = activities
+  .filter(activities => activities.state != "finished")
+  .map(activity =>
+    <div onClick={()=>navigate(`/dashboard/course/${activity.idCourse}/exam/${activity.idExam}`)}>
+      <TestCard data={activity} window={window}/>
+      <LineRule />
+    </div>
+  )
+
+  const activitiesFilled = activities
+  .filter(activities => activities.state == "finished")
+  .map(activity =>
+    <div onClick={()=>navigate(`/dashboard/course/${activity.idCourse}/exam/${activity.idExam}`)}>
+      <TestCard data={activity} window={window}/>
+      <LineRule />
+    </div>
+  )
 
   return (
     <div className="activities">
@@ -17,15 +56,8 @@ const Activities = () => {
         <h4 className="header">Actividades pendientes</h4>
         <div className="container">
           <div className="content">
-            <TestCard data={test1} />
-            <LineRule />
-            <TestCard data={test1} />
-            <LineRule />
-            <TestCard data={test1} />
-            <LineRule />
-            <TestCard data={test1} />
-            <LineRule />
-            <TestCard data={test1} />
+          {loading? <LoadingSpinner/>:<div></div>}
+            {activitiesUnfilled}
           </div>
         </div>
       </div>
@@ -33,13 +65,8 @@ const Activities = () => {
         <h4 className="header">Actividades entregadas</h4>
         <div className="container">
           <div className="content">
-            <TestCard  data={test1} type="filled" />
-            <LineRule />
-            <TestCard type="graded"  data={test1} />
-            <LineRule />
-            <TestCard type="graded"  data={test1} />
-            <LineRule />
-            <TestCard type="filled"  data={test1} />
+          {loading? <LoadingSpinner/>:<div></div>}
+            {activitiesFilled}
           </div>
         </div>
       </div>
