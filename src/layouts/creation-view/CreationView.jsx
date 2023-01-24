@@ -2,10 +2,10 @@ import React from 'react'
 import { CreationCard } from '../../components'
 import './creation-view.css'
 
-const CreationView = () => {
+const CreationView = ({ type }) => {
   return (
     <div className='creation-view'>
-        <CreationCard />
+        <CreationCard text={type} />
     </div>
   )
 }

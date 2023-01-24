@@ -2,9 +2,9 @@ import React from "react";
 import { useState } from "react";
 import "./creation-card.css";
 
-const CreationCard = () => {
+const CreationCard = ({ text }) => {
 
-    const type = 'question';
+    const type = text;
     const [options, setOptions] = useState([]);
     
     function handleAddOption(e) {
@@ -102,8 +102,8 @@ const CreationCard = () => {
               <h2 className="creation-card-exam-name">Parcial 1</h2>
               <form className="creation-card-form" action="">
                 <div className="creation-card-form-area">
-                  <label className="creation-card-form-area-title" htmlFor="nameCourse">Tipo de pregunta<span>*</span></label>
-                  <input className="creation-card-form-area-input" style={{width: 'auto', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="Seleccione el tipo de pregunta" list="types" name="question-type" id="question-type" />
+                  <label className="creation-card-form-area-title" htmlFor="nameCourse">type de pregunta<span>*</span></label>
+                  <input className="creation-card-form-area-input" style={{width: 'auto', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="Seleccione el type de pregunta" list="types" name="question-type" id="question-type" />
                   <datalist id="types">
                     <option value="Seleccion multiple" />
                   </datalist>

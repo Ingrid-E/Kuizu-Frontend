@@ -89,3 +89,14 @@
 .question-card-header-buttons-button:hover {
     transform: scale(1.1);
 }
+
+.question-card-icon-arrow-left {
+  color: #FFFFFF;
+  height: 70%;
+  transform: rotate(-90deg);
+}
+
+.question-card-icon-pencil {
+  color: #FFFFFF;
+  height: 50%;
+}

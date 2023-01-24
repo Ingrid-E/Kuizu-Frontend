@@ -1,5 +1,7 @@
+import { faChevronLeft, faPencil } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import CircleButton from "../circle-button/CircleButton";
+import Icon from "../icon/Icon";
 import "./question-card.css";
 
 const QuestionCard = () => {
@@ -15,8 +17,8 @@ const QuestionCard = () => {
       <div className="question-card-header">
         <h4 className="question-card-header-title">Pregunta 1</h4>
         <div className="question-card-header-buttons">
-          <button className="question-card-header-buttons-button">a</button>
-          <button className="question-card-header-buttons-button" onClick={handleClick}>a</button>
+          <button className="question-card-header-buttons-button"><Icon css='question-card-icon-pencil' icon={faPencil} /></button>
+          <button className="question-card-header-buttons-button" onClick={handleClick}><Icon css='question-card-icon-arrow-left' icon={faChevronLeft} /></button>
         </div>
       </div>
       <div className="question-card-content">

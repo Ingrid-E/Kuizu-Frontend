@@ -14,3 +14,4 @@ export { default as TitleCard } from "./title-card/TitleCard";
 export { default as DateInfoCard} from "./date-info-card/DateInfoCard";
 export { default as CreationCard } from "./creation-card/CreationCard";
 export { default as LoadingSpinner} from "./loading-spinner/LoadingSpinner"
+export { default as Icon } from "./icon/Icon";

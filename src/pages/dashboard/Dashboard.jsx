@@ -13,8 +13,7 @@ const Dashboard = () => {
 
   return (
     <div className='dashboard'>
-      <Navbar user_img = {user.imgurl} firstname={user.firstname} lastname={user.lastname}/>
-      <SideBar user_img = {user.imgurl} firstname={user.firstname} lastname={user.lastname} rol={user.type}/>
+      <Navbar user={user}/>
       <Routes>
         <Route path='/' element={<DashboardHome user_type={user.type} user_type_id= {user.type_id}/>}></Route>
         <Route path='/course/:id_course' element={<DashboardCourse/>}></Route>
