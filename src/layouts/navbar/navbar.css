@@ -22,3 +22,17 @@
   height: 100%;
   width: auto;
 }
+
+.navbar__menu-buttons-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+  height: 100%;
+  width: auto;
+  transition: .2s ease-in-out;
+}
+
+.navbar__menu-buttons-user.hide {
+  opacity: 0;
+}

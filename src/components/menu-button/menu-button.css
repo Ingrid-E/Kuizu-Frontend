@@ -17,6 +17,7 @@
   transition: 0.3s ease-in-out;
   display: flex;
   justify-content: flex-end;
+  z-index: 1001;
 }
 
 .menu-button .menu-button-line::before {
@@ -48,11 +49,11 @@
 .menu-button.active .menu-button-line::before {
   top: 0;
   transform: rotate(-45deg);
-  transition-delay: .3s;
+  transition-delay: 0.3s;
 }
 
 .menu-button.active .menu-button-line::after {
   bottom: 0;
   transform: rotate(45deg);
-  transition-delay: .3s;
+  transition-delay: 0.3s;
 }

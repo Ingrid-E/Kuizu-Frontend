@@ -1,5 +1,7 @@
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import Icon from '../icon/Icon';
 import './back-button.css'
 
 const BackButton = () => {
@@ -12,7 +14,7 @@ const BackButton = () => {
 
   return (
     <a className='back-button' href="" onClick={handleClick}>
-        a
+        <Icon css='icon-arrow-left' icon={faChevronLeft} />
     </a>
   )
 }
