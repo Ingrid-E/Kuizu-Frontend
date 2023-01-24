@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 100%;
   row-gap: 5px;
-  overflow: hidden;
+  
 }
 
 .question-card-header {
@@ -63,4 +63,40 @@
 .question-card-content-item-list-option span {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
+}
+
+.question-card-header-buttons-button {
+  width: 35px;
+  height: 35px;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+  transition: .3s ease-in-out;
+  border: none;
+}
+
+.question-card-header-buttons-button:nth-child(1) {
+  background-color: #FFD972;
+}
+
+.question-card-header-buttons-button:nth-child(2) {
+  background-color: #304C89;
+}
+
+.question-card-header-buttons-button:hover {
+    transform: scale(1.1);
+}
+
+.question-card-icon-arrow-left {
+  color: #FFFFFF;
+  height: 70%;
+  transform: rotate(-90deg);
+}
+
+.question-card-icon-pencil {
+  color: #FFFFFF;
+  height: 50%;
 }

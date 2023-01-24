@@ -9,3 +9,6 @@ export { default as CourseInfo } from "./course-info/CourseInfo";
 export { default as DashboardExam } from "./dashboard-exam/DashboardExam";
 export { default as ExamContent } from "./exam-content/ExamContent";
 export { default as ExamInfo } from "./exam-info/ExamInfo";
+export { default as SideBar } from "./side-bar/SideBar";
+export { default as DashboardCourse } from "./dashboard-course/DashboardCourse";
+export { default as CreationView } from "./creation-view/CreationView";

@@ -1,8 +1,17 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import CircleImage from "../circle-image/CircleImage";
 import "./test-card.css";
 
 const TestCard = ({ data, type }) => {
+
+  const nav = useNavigate();
+  const user = useLocation().state.user
+
+  function handleClick() {
+    nav('/dashboard-exam', {state: {user: user, info: data}});
+  }
+
   if ((type == "filled")) {
     return (
       <a className="test-card" href="">
@@ -47,7 +56,7 @@ const TestCard = ({ data, type }) => {
           <p>{data.course}</p>
         </div>
       </div>
-      <a className="test-card-button" href="">
+      <a className="test-card-button" href="" onClick={handleClick}>
         Resolverlo
       </a>
     </div>
