@@ -1,40 +1,78 @@
 import React from "react";
 import { useState } from "react";
+import Cookies from 'js-cookie';
 import "./creation-card.css";
+import LoadingSpinner from "../loading-spinner/LoadingSpinner";
+import { createCourse } from "../../hooks/course-hooks";
 
 const CreationCard = ({ text }) => {
 
     const type = text;
     const [options, setOptions] = useState([]);
-    
+    const [loading, setLoading] = useState(false)
+    const teacher_id = JSON.parse(Cookies.get('user')).type_id
     function handleAddOption(e) {
       e.preventDefault();
       const newOptions = [...options, { id: options.length + 1, text: 'New Item' }];
       setOptions(newOptions);
     }
 
+    const hanldeCreateCourse = async(e)=>{
+      e.preventDefault()
+      setLoading(true)
+      const formData = new FormData(e.currentTarget);
+      formData.append('id_teacher', teacher_id.toString())
+      formData.append('startAt', formatDate(formData.get('courseStartDay'), formData.get('courseStartMonth'), formData.get('courseStartYear')))
+      formData.append('endAt', formatDate(formData.get('courseEndDay'), formData.get('courseEndMonth'),  formData.get('courseEndYear')))
+      const response = await createCourse(formData)
+      if(response.success){
+        setLoading(false)
+        window.location.reload(false)
+      }
+    }
+
+    const formatDate = (day, month, year)=>{
+      return `${year}-${month}-${day}`
+    }
+
     if (type === 'course') {
         return (
             <div className="creation-card">
+              <div className="creation-card-loader">{loading? <LoadingSpinner/>:<></>}</div>
               <h1 className="creation-card-title">Creando curso</h1>
-              <form className="creation-card-form" action="">
+              <form className="creation-card-form" onSubmit={(e)=>hanldeCreateCourse(e)}>
                 <div className="creation-card-form-area">
-                  <label className="creation-card-form-area-title" htmlFor="nameCourse">Nombre del curso<span>*</span></label>
-                  <input className="creation-card-form-area-input" style={{width: '300px', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="text" name="nameCourse" id="nameCourse" />
+                  <label className="creation-card-form-area-title" htmlFor="name">Nombre del curso<span>*</span></label>
+                  <input className="creation-card-form-area-input" style={{width: '300px', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="text" name="name" id="name" />
                 </div>
                 <div className="creation-card-form-area">
                   <label className="creation-card-form-area-title" htmlFor="description">Descripcion<span>*</span></label>
                   <input className="creation-card-form-area-input" style={{width: '300px', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="text" name="description" id="description" />
                 </div>
                 <div className="creation-card-form-area">
+                  <h2 className="creation-card-form-area-title" htmlFor="nameCourse">Fecha Inicio<span>(opcional)</span></h2>
+                  <div className="creation-card-form-area-options">
+                    <label className="creation-card-form-area-subtitle" htmlFor="courseStartDay">Dia</label>
+                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="DD" type="text" name="courseStartDay" id="courseStartDay" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="courseStartMonth">Mes</label>
+                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="MM" type="text" name="courseStartMonth" id="courseStartMonth" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="courseStartYear">Año</label>
+                    <input className="creation-card-form-area-input" style={{width: '50px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="YYYY" type="text" name="courseStartYear" id="courseStartYear" />
+                  </div>
+                </div>
+                <div className="creation-card-form-area">
                   <h2 className="creation-card-form-area-title" htmlFor="nameCourse">Fecha finalizacion<span>(opcional)</span></h2>
                   <div className="creation-card-form-area-options">
-                    <label className="creation-card-form-area-subtitle" htmlFor="">Dia</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="DD" type="text" name="day" id="day" />
-                    <label className="creation-card-form-area-subtitle" htmlFor="">Mes</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="MM" type="text" name="month" id="month" />
-                    <label className="creation-card-form-area-subtitle" htmlFor="">Año</label>
-                    <input className="creation-card-form-area-input" style={{width: '50px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="YYYY" type="text" name="year" id="year" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="courseEndDay">Dia</label>
+                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="DD" type="text" name="courseEndDay" id="courseEndDay" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="courseEndMonth">Mes</label>
+                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="MM" type="text" name="courseEndMonth" id="courseEndMonth" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="courseEndYear">Año</label>
+                    <input className="creation-card-form-area-input" style={{width: '50px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="YYYY" type="text" name="courseEndYear" id="courseEndYear" />
+                  </div>
+                  <div className="creation-card-form-area">
+                    <label className="creation-card-form-area-subtitle" htmlFor="icon">Subir imagen curso</label>
+                    <input className="creation-card-form-area-inputfile" style={{width: '300px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="file" name="icon" id="icon" />
                   </div>
                 </div>
                 <button className="creation-card-form-button" type="submit">Crear curso</button>

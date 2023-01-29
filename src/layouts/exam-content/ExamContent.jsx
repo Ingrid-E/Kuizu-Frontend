@@ -1,11 +1,22 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { LineRule, QuestionCard } from "../../components";
 import "./exam-content.css";
 
-const ExamContent = () => {
+const ExamContent = ({questions}) => {
   
   const [content, setContent] = useState('questions');
+  const [questionList, setQuestionList] = useState([])
+
+  useEffect(()=>{
+    if(questions.length > 0){
+      setQuestionList(questions.map((question, index) =>
+        <div>
+            <QuestionCard idQuestion = {question.idQuestion} index={index+1}/>
+            <LineRule />
+        </div>
+      ))
+    }
+  }, [questions])
 
   const viewQuestions = e => {
     setContent('questions');
@@ -14,7 +25,7 @@ const ExamContent = () => {
   const viewFilled = e => {
     setContent('filled');
   }
-  
+
   if (content === 'questions') {
     return (
       <div className="exam-content">
@@ -30,19 +41,7 @@ const ExamContent = () => {
         </div>
         <div className="container">
           <div className="content">
-              <QuestionCard />
-              <LineRule />
-              <QuestionCard />
-              <LineRule />
-              <QuestionCard />
-              <LineRule />
-              <QuestionCard />
-              <LineRule />
-              <QuestionCard />
-              <LineRule />
-              <QuestionCard />
-              <LineRule />
-              <QuestionCard />
+            {questionList}
           </div>
         </div>
         <button className="exam-content-button-add">

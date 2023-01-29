@@ -7,6 +7,33 @@ export const getAllCourses = async()=>{
     return courseData
 }
 
+export const createCourse = async(courseData)=>{
+    var formdata = new FormData();
+    formdata.append("icon", courseData.get('icon'),  courseData.get('icon').name);
+    formdata.append("name", courseData.get('name'));
+    formdata.append("description", courseData.get('description'));
+    formdata.append("shortName", "short");
+    formdata.append("createdAt", formatDate(new Date()));
+    formdata.append("startAt", courseData.get('startAt'));
+    formdata.append("endAt", courseData.get('endAt'));
+    formdata.append("id_teacher", courseData.get('id_teacher'));
+    //mientras se intenta acomodar el formdata en el apigateway
+    const res = await fetch('https://kuizu-courses-micro.herokuapp.com/',{
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+    })
+    return res.json()
+}
+
+const formatDate = (date)=>{
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      }).replace(/(\d+)\/(\d+)\/(\d+)/, '$3-$1-$2');
+}
+
 export const getCourseInfo = async(course_id)=>{
     const res = await fetch(process.env.REACT_APP_DEV_MICRO+`course/${course_id}`,{
         method: 'GET',
@@ -17,6 +44,7 @@ export const getCourseInfo = async(course_id)=>{
 }
 
 export const getUserTypeCourse = async(type, type_id)=>{
+    console.log("GET USER TYPE COURSE: ", type, type_id)
     const res = await fetch(process.env.REACT_APP_DEV_MICRO+`course/${type}/${type_id}`,{
         method: 'GET',
         headers: {
@@ -24,6 +52,7 @@ export const getUserTypeCourse = async(type, type_id)=>{
         }
     })
     const courseData = await res.json()
+    console.log()
     return courseData
 }
 
@@ -56,6 +85,17 @@ export const getUserInfo = async(user_type, type_id)=>{
 
 export const getTeacherCoursesAverage = async(teacher_id)=>{
     const courses = await fetch(process.env.REACT_APP_DEV_MICRO+`course/teacher/average/${teacher_id}`,{
+        method: 'GET',
+        headers: {
+            'Content-Type':'application/json'
+        }
+    })
+    const coursesData = await courses.json()
+    return coursesData
+}
+
+export const getStudentCoursesAverage = async(student_id)=>{
+    const courses = await fetch(process.env.REACT_APP_DEV_MICRO+`course/student/average/${student_id}`,{
         method: 'GET',
         headers: {
             'Content-Type':'application/json'

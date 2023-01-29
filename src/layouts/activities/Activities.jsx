@@ -45,7 +45,7 @@ const Activities = ({data, window}) => {
   .filter(activities => activities.state == "finished")
   .map(activity =>
     <div onClick={()=>navigate(`/dashboard/course/${activity.idCourse}/exam/${activity.idExam}`)}>
-      <TestCard data={activity} window={window}/>
+      <TestCard data={activity} window={window} type={"graded"}/>
       <LineRule />
     </div>
   )
