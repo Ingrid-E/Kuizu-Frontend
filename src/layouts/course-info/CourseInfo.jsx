@@ -1,22 +1,33 @@
 import React, {useEffect, useState} from 'react'
 import { AverageCardCourse, InfoActivitiesCard, UserInfoCard } from '../../components'
 import './course-info.css'
-import { getTeacherCoursesAverage } from '../../hooks/course-hooks'
+import { getStudentCoursesAverage, getTeacherCoursesAverage } from '../../hooks/course-hooks'
 
-const CourseInfo = ({course}) => {
+const CourseInfo = ({course, user}) => {
 
   const [average, setAverage] = useState(0)
 
   useEffect(()=>{
-    if(course._id != ""){
+    if(course._id != "" && user.type === "teacher"){
       handleCourseAverag(course.id_teacher, course._id)
+    }
+    if(user.type === "student"){
+      handleStudentAverage(user.type_id, course._id)
     }
   }, [course])
 
   const handleCourseAverag =async(id_teacher, course_id)=>{
       const courseList = await getTeacherCoursesAverage(id_teacher)
-      const course = courseList.data.courses.find(element => element.id_course = course_id)
-      setAverage(course.average)
+      const course = courseList.data.courses.find(element => element.id_course === course_id)
+      if(course)  setAverage(course.average)
+      else setAverage(0.0)
+  }
+
+  const handleStudentAverage =async(id_student, course_id)=>{
+    const courseList = await getStudentCoursesAverage(id_student)
+    const course = await courseList.data.courses.find(element => element.id_course === course_id)
+    if(course)  setAverage(course.average)
+    else setAverage(0.0)
   }
 
   return (

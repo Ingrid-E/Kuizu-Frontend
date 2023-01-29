@@ -16,7 +16,7 @@ const Dashboard = () => {
       <Navbar user={user}/>
       <Routes>
         <Route path='/' element={<DashboardHome user_type={user.type} user_type_id= {user.type_id}/>}></Route>
-        <Route path='/course/:id_course' element={<DashboardCourse/>}></Route>
+        <Route path='/course/:id_course' element={<DashboardCourse user= {user}/>}></Route>
         <Route path='/course/:id_course/exam/:id_exam' element={<DashboardExam/>}></Route>
       </Routes>
     </div>

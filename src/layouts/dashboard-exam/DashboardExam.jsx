@@ -27,7 +27,6 @@ const DashboardExam = () => {
     const questions = await getExamQuestions(exam_id);
     setExam(exam.data.data)
     setQuestions(questions.data.data)
-
   }
 
   return (
@@ -38,7 +37,7 @@ const DashboardExam = () => {
           <ExamInfoStudent data={exam} questions={questions.length}/>
         </div>
         :<div className="sections">
-          <ExamContent />
+          <ExamContent questions={questions}/>
           <ExamInfo data={exam} questions={questions.length}/>
         </div>
         }

@@ -42,3 +42,48 @@ export const getCourseActivities = async(id_course)=>{
     return activitiesData
 }
 
+export const getStudentExamGrade = async(id_student, id_exam)=>{
+    const grade = await fetch(process.env.REACT_APP_DEV_MICRO+`exam/grade/student/${id_student}/exam/${id_exam}`,{
+        method: 'GET',
+        headers: {
+            'Content-Type':'application/json'
+        }
+    })
+    const gradeData = await grade.json()
+    return gradeData
+}
+
+export const getStudentCompletedExam = async(idExam)=>{
+    const completed = await fetch(process.env.REACT_APP_DEV_MICRO+`exam/grade/student?idExam=${idExam}`,{
+        method: 'GET',
+        headers: {
+            'Content-Type':'application/json'
+        }
+    })
+    const completedData = await completed.json()
+    return completedData
+}
+
+export const getQuestionInfo = async(idQuestion)=>{
+    const question = await fetch(process.env.REACT_APP_DEV_MICRO+`exam/question/${idQuestion}`,{
+        method: 'GET',
+        headers: {
+            'Content-Type':'application/json'
+        }
+    })
+    const questionData = await question.json()
+    return questionData
+}
+
+export const getQuestionOptions = async(idQuestion)=>{
+    const options = await fetch(process.env.REACT_APP_DEV_MICRO+`exam/question/option?idQuestion=${idQuestion}`,{
+        method: 'GET',
+        headers: {
+            'Content-Type':'application/json'
+        }
+    })
+    const optionsData = await options.json()
+    return optionsData
+}
+
+

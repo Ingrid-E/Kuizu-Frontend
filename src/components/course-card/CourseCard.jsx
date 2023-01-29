@@ -6,7 +6,7 @@ const CourseCard = ({course, image}) => {
 
   return (
     <a className='course-card'>
-        <CircleImage width='60px' height='60px'image={image} />
+        <CircleImage width='60px' height='60px'image={course.icon} />
         <h2 className='course-card-name'>{course.name}</h2>
     </a>
   )

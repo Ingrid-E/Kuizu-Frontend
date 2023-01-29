@@ -1,14 +1,18 @@
 import React, {useEffect, useState} from 'react'
 import { AverageCard } from '../../components'
-import { getCourseAverage } from '../../hooks/course-hooks'
+import { getCourseAverage, getStudentCoursesAverage, getTeacherCoursesAverage } from '../../hooks/course-hooks'
 import './dashboard-averages.css'
 
-const DashboardAverages = ({data}) => {
+const DashboardAverages = ({data,userType, userId}) => {
 
   const [courses, setCourses] = useState([])
 
   useEffect(()=>{
-    handleCourseAverages(data)
+    if(userType === "student"){
+      handleStudentCourseAverages(userId)
+    }else{
+      handleTeacherCourseAverages(userId)
+    }
   }, [data])
 
   const handleCourseAverages = async(courseList)=>{
@@ -23,7 +27,17 @@ const DashboardAverages = ({data}) => {
     setCourses(courseAverageList)
   }
 
-  const paintAverages = courses.map(course => <AverageCard average={course.average} courseName={course.name}/>)
+  const handleStudentCourseAverages = async(user_id)=>{
+    const coursesAvg = await getStudentCoursesAverage(user_id);
+    setCourses(coursesAvg.data.courses)
+  }
+
+  const handleTeacherCourseAverages = async(user_id)=>{
+    const coursesAvg = await getTeacherCoursesAverage(user_id);
+    setCourses(coursesAvg.data.courses)
+  }
+
+  const paintAverages = courses.map(course => <AverageCard average={course.average} courseName={course.course}/>)
 
   return (
     <div className='dashboard-averages'>
