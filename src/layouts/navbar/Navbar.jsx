@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
 import logo from "../../assets/images/kuizu-logo.png";
 import { CircleImage, UserImage } from "../../components";
-import MenuButton from "../../components/menu-button/MenuButton";
-import CreationView from "../creation-view/CreationView";
 import SideBar from "../side-bar/SideBar";
 import "./navbar.css";
 

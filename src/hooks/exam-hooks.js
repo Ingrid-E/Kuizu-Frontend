@@ -86,4 +86,25 @@ export const getQuestionOptions = async(idQuestion)=>{
     return optionsData
 }
 
+export const createExam = async(data)=>{
+    //mientras se intenta acomodar el formdata en el apigateway
+    const res = await fetch('https://kuizu-exam-micro.herokuapp.com/exam',{
+        method: 'POST',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            name: data.get('name'),
+            description: '...',
+            startAt: data.get('startAt'),
+            endAt: data.get('endAt'),
+            timeLimit: data.get('timeLimit'),
+            state: 'active',
+            idCourse: data.get('idCourse')
+        }),
+        redirect: 'follow'
+    })
+    return res.json()
+}
+
 

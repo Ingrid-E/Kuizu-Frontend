@@ -1,10 +1,8 @@
 import React from "react";
-import {DateInfoCard, InfoActivitiesCard, TitleCard } from "../../components";
 import "./exam-info-student.css";
 
-const ExamInfoStudent = ({data, rol, questions}) => {
+const ExamInfoStudent = ({ data, rol, questions}) => {
 
-  console.log(data)
 
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -30,6 +28,7 @@ const ExamInfoStudent = ({data, rol, questions}) => {
   return (
     <div className="exam-info-student">
       <div className="exam-info-content">
+        <h1>{data.name}</h1>
         <h2>Tiempo: {formatTimeLimit(data.timeLimit)}</h2>
         <h2>Numero de preguntas: {questions}</h2>
         <h2>Inicio: {formatDate(data.startAt)}</h2>

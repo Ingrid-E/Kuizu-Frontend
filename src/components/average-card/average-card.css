@@ -37,3 +37,14 @@
   right: -20%;
   bottom: -50%;
 }
+
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  
+}
+
+@media screen and (max-width: 767px) {
+  .average-card-data-title {
+    font-size: 1.8rem;
+  }
+}

@@ -85,3 +85,13 @@
     line-height: 1rem;
     color: #FFFFFF;
 }
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media screen and (max-width: 767px) {
+    .creation-view-exit-button {
+        top: 15px;
+        right: 15px;
+    }
+}

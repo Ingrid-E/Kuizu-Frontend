@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {DashboardCourse, DashboardExam, DashboardHome, Navbar, SideBar } from '../../layouts'
+import {CreationView, DashboardCourse, DashboardExam, DashboardHome, Navbar, SideBar } from '../../layouts'
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Cookies from 'js-cookie';
 import './dashboard.css'

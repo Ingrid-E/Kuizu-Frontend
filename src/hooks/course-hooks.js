@@ -35,9 +35,11 @@ const formatDate = (date)=>{
 }
 
 export const getCourseInfo = async(course_id)=>{
-    const res = await fetch(process.env.REACT_APP_DEV_MICRO+`course/${course_id}`,{
+    const res = await fetch(`https://kuizu-courses-micro.herokuapp.com/${course_id}`,{
         method: 'GET',
-        headers: {}
+        headers: {
+            'Content-Type':'application/json'
+        }
     })
     const courseData = await res.json()
     return courseData
@@ -107,6 +109,17 @@ export const getStudentCoursesAverage = async(student_id)=>{
 
 export const getCourseAverage = async(course_id)=>{
     const courses = await fetch(process.env.REACT_APP_DEV_MICRO+`course/average/${course_id}`,{
+        method: 'GET',
+        headers: {
+            'Content-Type':'application/json'
+        }
+    })
+    const coursesData = await courses.json()
+    return coursesData
+}
+
+export const getCourseStudents = async(course_id)=>{
+    const courses = await fetch(`http://127.0.0.1:8000/course-students/${course_id}`,{
         method: 'GET',
         headers: {
             'Content-Type':'application/json'
