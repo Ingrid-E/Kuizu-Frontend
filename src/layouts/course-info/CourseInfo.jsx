@@ -41,12 +41,16 @@ const CourseInfo = ({ course, user }) => {
     <div className='course-info'>
         <h4 className="header">Informacion</h4>
         <div className='course-info-content'>
-            <AverageCardCourse average={average === 0? "--": average} />
+        <div className="course-info-content-values">
+          <AverageCardCourse average={average === 0 ? "--" : average} />
+          <div className="course-info-content-values-activities">
             <InfoActivitiesCard title={user.type == "teacher"? 'Actividades creadas': 'Actividades entregadas'} count={user.type == "teacher"? activities.length: activities.filter(activity => activity.status = "finished").length} />
             <InfoActivitiesCard title={user.type == "teacher"? 'Estudiantes Matriculados': 'Actividades pendientes'} count= {user.type == "teacher"? students: activities.filter(activity => activity.status = "active").length} />
-            <UserInfoCard  type={"teacher"} type_id={course.id_teacher} />
+          </div>
         </div>
+        <UserInfoCard  type={"teacher"} type_id={course.id_teacher} />
       </div>
+    </div>
   );
 };
 
