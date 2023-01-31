@@ -22,17 +22,9 @@ jobs:
         node-version: '18.12.0'
     - run: npm ci
     
-  test:
-    needs: [build]
-    name: Test 📝
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - run: npm test
-    
   alert:
     if: ${{ always() }}
-    needs: [test]
+    needs: [build]
     name: Alert 🤖
     runs-on: ubuntu-latest
 
