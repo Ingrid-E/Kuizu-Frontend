@@ -12,6 +12,7 @@ const CreationCard = ({ text }) => {
     const [options, setOptions] = useState([])
     const [loading, setLoading] = useState(false)
     const [courses, setCourses] = useState([{}])
+    const [students, setStudents] = useState([]);
     const teacher_id = JSON.parse(Cookies.get('user')).type_id
 
     useEffect(()=>{
@@ -27,6 +28,12 @@ const CreationCard = ({ text }) => {
       e.preventDefault();
       const newOptions = [...options, { id: options.length + 1, text: 'New Item' }];
       setOptions(newOptions);
+    }
+
+    function handleAddStudent(e) {
+      e.preventDefault();
+      students.push('hola');
+      setStudents(students);
     }
 
     const handleCreateCourse = async(e)=>{
@@ -72,36 +79,36 @@ const CreationCard = ({ text }) => {
               <form className="creation-card-form" onSubmit={(e)=>handleCreateCourse(e)}>
                 <div className="creation-card-form-area">
                   <label className="creation-card-form-area-title" htmlFor="name">Nombre del curso<span>*</span></label>
-                  <input className="creation-card-form-area-input" style={{width: '300px', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="text" name="name" id="name" />
+                  <input className="creation-card-form-area-input" style={{width: 'auto', textAlign: 'left'}} type="text" name="name" id="name" />
                 </div>
                 <div className="creation-card-form-area">
                   <label className="creation-card-form-area-title" htmlFor="description">Descripcion<span>*</span></label>
-                  <input className="creation-card-form-area-input" style={{width: '300px', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="text" name="description" id="description" />
+                  <input className="creation-card-form-area-input" style={{width: 'auto', textAlign: 'left'}} type="text" name="description" id="description" />
                 </div>
                 <div className="creation-card-form-area">
                   <h2 className="creation-card-form-area-title" htmlFor="nameCourse">Fecha Inicio<span>(opcional)</span></h2>
                   <div className="creation-card-form-area-options">
                     <label className="creation-card-form-area-subtitle" htmlFor="courseStartDay">Dia</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="DD" type="text" name="courseStartDay" id="courseStartDay" />
+                    <input className="creation-card-form-area-input" style={{width: '40px'}} placeholder="DD" type="text" name="courseStartDay" id="courseStartDay" />
                     <label className="creation-card-form-area-subtitle" htmlFor="courseStartMonth">Mes</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="MM" type="text" name="courseStartMonth" id="courseStartMonth" />
+                    <input className="creation-card-form-area-input" style={{width: '40px'}} placeholder="MM" type="text" name="courseStartMonth" id="courseStartMonth" />
                     <label className="creation-card-form-area-subtitle" htmlFor="courseStartYear">Año</label>
-                    <input className="creation-card-form-area-input" style={{width: '50px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="YYYY" type="text" name="courseStartYear" id="courseStartYear" />
+                    <input className="creation-card-form-area-input" style={{width: '50px'}} placeholder="YYYY" type="text" name="courseStartYear" id="courseStartYear" />
                   </div>
                 </div>
                 <div className="creation-card-form-area">
                   <h2 className="creation-card-form-area-title" htmlFor="nameCourse">Fecha finalizacion<span>(opcional)</span></h2>
                   <div className="creation-card-form-area-options">
                     <label className="creation-card-form-area-subtitle" htmlFor="courseEndDay">Dia</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="DD" type="text" name="courseEndDay" id="courseEndDay" />
+                    <input className="creation-card-form-area-input" style={{width: '40px'}} placeholder="DD" type="text" name="courseEndDay" id="courseEndDay" />
                     <label className="creation-card-form-area-subtitle" htmlFor="courseEndMonth">Mes</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="MM" type="text" name="courseEndMonth" id="courseEndMonth" />
+                    <input className="creation-card-form-area-input" style={{width: '40px'}} placeholder="MM" type="text" name="courseEndMonth" id="courseEndMonth" />
                     <label className="creation-card-form-area-subtitle" htmlFor="courseEndYear">Año</label>
-                    <input className="creation-card-form-area-input" style={{width: '50px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="YYYY" type="text" name="courseEndYear" id="courseEndYear" />
+                    <input className="creation-card-form-area-input" style={{width: '50px'}} placeholder="YYYY" type="text" name="courseEndYear" id="courseEndYear" />
                   </div>
                   <div className="creation-card-form-area">
                     <label className="creation-card-form-area-subtitle" htmlFor="icon">Subir imagen curso</label>
-                    <input className="creation-card-form-area-inputfile" style={{width: '300px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="file" name="icon" id="icon" />
+                    <input className="creation-card-form-area-inputfile" style={{width: '300px'}} type="file" name="icon" id="icon" />
                   </div>
                 </div>
                 <button className="creation-card-form-button" type="submit">Crear curso</button>
@@ -179,14 +186,14 @@ const CreationCard = ({ text }) => {
               <form className="creation-card-form" action="">
                 <div className="creation-card-form-area">
                   <label className="creation-card-form-area-title" htmlFor="nameCourse">type de pregunta<span>*</span></label>
-                  <input className="creation-card-form-area-input" style={{width: 'auto', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="Seleccione el type de pregunta" list="types" name="question-type" id="question-type" />
+                  <input className="creation-card-form-area-input" style={{width: 'auto', textAlign: 'left'}} placeholder="Seleccione el type de pregunta" list="types" name="question-type" id="question-type" />
                   <datalist id="types">
                     <option value="Seleccion multiple" />
                   </datalist>
                 </div>
                 <div className="creation-card-form-area">
                   <label className="creation-card-form-area-title" htmlFor="nameCourse">Enunciado<span>*</span></label>
-                  <input className="creation-card-form-area-input" style={{width: 'auto', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="text" name="statement" id="statement" />
+                  <input className="creation-card-form-area-input" style={{width: 'auto', textAlign: 'left'}} type="text" name="statement" id="statement" />
                 </div>
                 <div className="creation-card-form-area">
                   <label className="creation-card-form-area-title" htmlFor="nameCourse">Opciones</label>
@@ -194,7 +201,7 @@ const CreationCard = ({ text }) => {
                     {options.map((item) => (
                       <li key={item.id} className='creation-card-form-area-option-list-option'>
                         <div className="creation-card-form-area-option-list-option-content">
-                          <input className="creation-card-form-area-input" style={{flex: '1', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="text" name="question" id="question" />
+                          <input className="creation-card-form-area-input" style={{flex: '1'}} type="text" name="question" id="question" />
                           <div className="creation-card-form-area-option-list-option-content-check">
                             <label htmlFor="questionCheck">Correcta</label>
                             <input className="creation-card-form-area-input-checkbox" type="checkbox" name="questionCheck" id="questionCheck" />
@@ -210,6 +217,37 @@ const CreationCard = ({ text }) => {
             </div>
           );
     }
+
+    if (type === 'student') {
+      return (
+          <div className="creation-card">
+            <h1 className="creation-card-title">Matriculando estudiante</h1>
+            <form className="creation-card-form" action="">
+              <div className="creation-card-form-area">
+                <label className="creation-card-form-area-title" htmlFor="mailStudent">Correo estudiante<span>*</span></label>
+                <input className="creation-card-form-area-input" style={{width: 'auto', textAlign: 'left'}} placeholder="Correo del estudiante" name="student-mail" id="student-mail" />
+              </div>
+              <div className="creation-card-form-area">
+                <label className="creation-card-form-area-title" htmlFor="mailStudent">Agregados</label>
+                <ul className="creation-card-form-area-option-list">
+                  {students.map((item) => (
+                    <li key={item.id} className='creation-card-form-area-option-list-option'>
+                      <div className="creation-card-form-area-option-list-option-content">
+                        <input className="creation-card-form-area-input" style={{flex: '1'}} type="text" name="question" id="question" />
+                        <div className="creation-card-form-area-option-list-option-content-check">
+                          <label htmlFor="questionCheck">Correcta</label>
+                          <input className="creation-card-form-area-input-checkbox" type="checkbox" name="questionCheck" id="questionCheck" />
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <button className="creation-card-form-button" type="submit" onClick={(e) => handleAddStudent(e)}>Agregar estudiante</button>
+            </form>
+          </div>
+        );
+  }
 };
 
 export default CreationCard;

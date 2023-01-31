@@ -4,7 +4,7 @@ import './course-info.css'
 import { getCourseStudents, getStudentCoursesAverage, getTeacherCoursesAverage } from '../../hooks/course-hooks'
 import { getCourseActivities, getStudentCompletedExam } from '../../hooks/exam-hooks'
 
-const CourseInfo = ({course, user}) => {
+const CourseInfo = ({ course, user }) => {
 
   const [average, setAverage] = useState(0.0)
   const [activities, setActivities] = useState([])
@@ -13,10 +13,10 @@ const CourseInfo = ({course, user}) => {
     if(course._id != "" && user.type === "teacher"){
       handleCourseAverag(course.id_teacher, course._id)
     }
-    if(user.type === "student"){
-      handleStudentAverage(user.type_id, course._id)
+    if (user.type === "student") {
+      handleStudentAverage(user.type_id, course._id);
     }
-  }, [course])
+  }, [course]);
 
   const handleCourseAverag =async(id_teacher, course_id)=>{
       const courseList = await getTeacherCoursesAverage(id_teacher)
@@ -26,9 +26,9 @@ const CourseInfo = ({course, user}) => {
       const courseActivities = await getCourseActivities(course_id);
       if(courseActivities.data.data.length > 0) setActivities(courseActivities.data.data)
       
-      const studentList = await getCourseStudents(course_id)
-      if(studentList.data.students.length <= 0) setStudents(0)
-      else setStudents(studentList.data.students.length)
+      //const studentList = await getCourseStudents(course_id)
+      //if(studentList.data.students.length <= 0) setStudents(0)
+      //else setStudents(studentList.data.students.length)
   }
 
   const handleStudentAverage =async(id_student, course_id)=>{
@@ -46,8 +46,8 @@ const CourseInfo = ({course, user}) => {
             <InfoActivitiesCard title={user.type == "teacher"? 'Estudiantes Matriculados': 'Actividades pendientes'} count= {user.type == "teacher"? students: activities.filter(activity => activity.status = "active").length} />
             <UserInfoCard  type={"teacher"} type_id={course.id_teacher} />
         </div>
-    </div>
-  )
-}
+      </div>
+  );
+};
 
-export default CourseInfo
+export default CourseInfo;

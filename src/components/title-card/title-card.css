@@ -30,11 +30,38 @@
 }
 
 .title-card-circle:nth-child(2) {
-    left: -15%;
-    bottom: -35%;
+  left: -15%;
+  bottom: -68%;
 }
 
 .title-card-circle:nth-child(3) {
-    right: -15%;
-    top: -35%;
+  right: -15%;
+  top: -68%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media screen and (max-width: 767px) {
+  .title-card-text {
+    position: relative;
+    text-align: center;
+    width: 75%;
+    z-index: 2;
+  }
+
+  .title-card-circle {
+    width: 25%;
+    padding-bottom: 25%;
+  }
+
+  .title-card-circle:nth-child(2) {
+    left: -10%;
+    bottom: -110%;
+  }
+
+  .title-card-circle:nth-child(3) {
+    right: -10%;
+    top: -110%;
+  }
 }

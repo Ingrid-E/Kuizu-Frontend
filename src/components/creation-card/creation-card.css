@@ -37,6 +37,16 @@
     font-weight: 500;
 }
 
+.creation-card-form-area-input {
+    border-radius: 4px;
+    font-size: 1.2rem;
+    border: none;
+    padding: 2px 5px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    box-shadow: 0px 5px 6px rgba(0, 0, 0, .15);
+}
+
 .creation-card-form-area-options {
     display: flex;
     justify-content: center;
@@ -147,4 +157,30 @@
 
 .creation-card-loader {
     position: absolute;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media screen and (max-width: 767px) {
+    .creation-card {
+        width: 95%;
+        height: 95%;
+        max-width: 95%;
+    }
+
+    .creation-card-title {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .creation-card-form-area-title {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .creation-card-form-area-options {
+        flex-wrap: wrap;
+        row-gap: 10px;
+    }
 }

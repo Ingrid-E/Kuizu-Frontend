@@ -65,3 +65,18 @@
   font-weight: 600;
   margin: 0px 20px;
 }
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  
+}
+
+@media screen and (max-width: 767px) {
+  .test-card-button {
+    padding: 10px 10px;
+    font-size: .8rem;
+  }
+
+  .test-card-button-grade {
+    font-size: 1.8rem;
+  }
+}

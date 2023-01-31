@@ -31,7 +31,6 @@ const UserInfoCard = ({name, type_id, type}) => {
           height='125px'
         />
       <div className="user-info-card-data">
-        <div ></div>
         <h3 className="user-info-card-data-title">{type === "teacher"? "Docente":"Estudiante"}</h3>
         <h2 className="user-info-card-data-name">{user.firstname} {user.lastname != undefined? user.lastname:""}</h2>
       </div>
