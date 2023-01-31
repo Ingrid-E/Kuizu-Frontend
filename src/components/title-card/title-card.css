@@ -1,0 +1,67 @@
+.title-card {
+  width: auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex: 1;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.title-card-text {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+.title-card-circle {
+  width: 50%;
+  padding-bottom: 50%;
+  background: #b2baff;
+  border-radius: 100%;
+  position: absolute;
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+
+.title-card-circle:nth-child(2) {
+  left: -15%;
+  bottom: -68%;
+}
+
+.title-card-circle:nth-child(3) {
+  right: -15%;
+  top: -68%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media screen and (max-width: 767px) {
+  .title-card-text {
+    position: relative;
+    text-align: center;
+    width: 75%;
+    z-index: 2;
+  }
+
+  .title-card-circle {
+    width: 25%;
+    padding-bottom: 25%;
+  }
+
+  .title-card-circle:nth-child(2) {
+    left: -10%;
+    bottom: -110%;
+  }
+
+  .title-card-circle:nth-child(3) {
+    right: -10%;
+    top: -110%;
+  }
+}

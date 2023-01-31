@@ -1,0 +1,49 @@
+.exam-info {
+  min-width: 350px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  flex: 1;
+}
+
+.exam-info-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  row-gap: 10px;
+}
+
+.exam-info-content-data {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  row-gap: 10px;
+}
+
+.exam-info-content-dates {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.exam-info-content-values {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media screen and (max-width: 767px) {
+  .exam-info-content-data {
+    flex-direction: row-reverse;
+    column-gap: 10px;
+  }
+
+  .exam-info-content-dates {
+    width: 40%;
+    min-width: 40%;
+  }
+}

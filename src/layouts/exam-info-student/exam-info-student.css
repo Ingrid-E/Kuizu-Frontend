@@ -1,0 +1,23 @@
+.exam-info-student {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  flex: 1;
+  width: 100vw;
+  align-items: center;
+}
+.exam-info-student .exam-info-content h2{
+  color: white;
+  font-weight: 400;
+  font-size: 2rem;
+}
+
+.exam-info-student .exam-info-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  row-gap: 10px;
+  align-items: center;
+  margin-top: 10vh;
+}
