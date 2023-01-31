@@ -1,23 +1,35 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import Cookies from 'js-cookie';
 import "./creation-card.css";
 import LoadingSpinner from "../loading-spinner/LoadingSpinner";
-import { createCourse } from "../../hooks/course-hooks";
+import { createCourse, getUserTypeCourse } from "../../hooks/course-hooks";
+import { createExam } from "../../hooks/exam-hooks";
 
 const CreationCard = ({ text }) => {
 
     const type = text;
-    const [options, setOptions] = useState([]);
+    const [options, setOptions] = useState([])
     const [loading, setLoading] = useState(false)
+    const [courses, setCourses] = useState([{}])
     const teacher_id = JSON.parse(Cookies.get('user')).type_id
+
+    useEffect(()=>{
+      listCourses()
+    }, [])
+
+    const listCourses = async()=>{
+      const courses = await getUserTypeCourse('teacher', teacher_id)
+      setCourses(courses.data.courses)
+    }
+
     function handleAddOption(e) {
       e.preventDefault();
       const newOptions = [...options, { id: options.length + 1, text: 'New Item' }];
       setOptions(newOptions);
     }
 
-    const hanldeCreateCourse = async(e)=>{
+    const handleCreateCourse = async(e)=>{
       e.preventDefault()
       setLoading(true)
       const formData = new FormData(e.currentTarget);
@@ -31,8 +43,25 @@ const CreationCard = ({ text }) => {
       }
     }
 
+    const handleCreateExam = async(e)=>{
+      e.preventDefault()
+      setLoading(true)
+      const formData = new FormData(e.currentTarget);
+      formData.append('startAt', formatDateHour(formData.get('StartDay'), formData.get('StartMonth'), formData.get('StartYear'), formData.get('StartHour'), formData.get('StartMinutes')))
+      formData.append('endAt', formatDateHour(formData.get('EndDay'), formData.get('EndMonth'),  formData.get('EndYear'), formData.get('EndHour'), formData.get('EndMinutes')))
+      const response = await createExam(formData)
+      if(response.success){
+        setLoading(false)
+        window.location.reload(false)
+      }
+    }
+
     const formatDate = (day, month, year)=>{
       return `${year}-${month}-${day}`
+    }
+
+    const formatDateHour = (day, month, year, hour, minute)=>{
+      return `${year}-${month}-${day} ${hour}:${minute}`
     }
 
     if (type === 'course') {
@@ -40,7 +69,7 @@ const CreationCard = ({ text }) => {
             <div className="creation-card">
               <div className="creation-card-loader">{loading? <LoadingSpinner/>:<></>}</div>
               <h1 className="creation-card-title">Creando curso</h1>
-              <form className="creation-card-form" onSubmit={(e)=>hanldeCreateCourse(e)}>
+              <form className="creation-card-form" onSubmit={(e)=>handleCreateCourse(e)}>
                 <div className="creation-card-form-area">
                   <label className="creation-card-form-area-title" htmlFor="name">Nombre del curso<span>*</span></label>
                   <input className="creation-card-form-area-input" style={{width: '300px', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="text" name="name" id="name" />
@@ -84,47 +113,56 @@ const CreationCard = ({ text }) => {
     if (type === 'exam') {
         return (
             <div className="creation-card">
+              <div className="creation-card-loader">{loading? <LoadingSpinner/>:<></>}</div>
               <h1 className="creation-card-title">Creando examen</h1>
-              <form className="creation-card-form" action="">
+              <form className="creation-card-form" onSubmit={(e)=>handleCreateExam(e)}>
                 <div className="creation-card-form-area">
-                  <label className="creation-card-form-area-title" htmlFor="nameCourse">Nombre del examen<span>*</span></label>
-                  <input className="creation-card-form-area-input" style={{width: 'auto', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="text" name="nameCourse" id="nameCourse" />
+                  <label className="creation-card-form-area-title" htmlFor="name">Nombre del examen<span>*</span></label>
+                  <input className="creation-card-form-area-input" style={{width: 'auto', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="text" name="name" id="name" />
+                </div>
+                <div className="creation-card-form-area">
+                  <label className="creation-card-form-area-title" htmlFor="idCourse">Curso<span>*</span></label>
+                  <select className="creation-card-form-area-input" style={{width: '300px', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="text" name="idCourse" id="idCourse" >
+                    {courses.map((course)=>(
+                        <option value={course._id}>{course.name}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="creation-card-form-area">
                   <h2 className="creation-card-form-area-title" htmlFor="nameCourse">Tiempo para resolverlo<span>(opcional)</span></h2>
                   <div className="creation-card-form-area-options">
-                    <label className="creation-card-form-area-subtitle" htmlFor="">Tiempo en minutos</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="00" type="text" name="day" id="day" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="timeLimit">Tiempo en minutos</label>
+                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="00" type="text" name="timeLimit" id="day" />
                   </div>
                 </div>
                 <div className="creation-card-form-area">
                   <h2 className="creation-card-form-area-title" htmlFor="nameCourse">Fecha de inicio</h2>
                   <div className="creation-card-form-area-options">
-                    <label className="creation-card-form-area-subtitle" htmlFor="">Dia</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="DD" type="text" name="day" id="day" />
-                    <label className="creation-card-form-area-subtitle" htmlFor="">Mes</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="MM" type="text" name="month" id="month" />
-                    <label className="creation-card-form-area-subtitle" htmlFor="">Año</label>
-                    <input className="creation-card-form-area-input" style={{width: '50px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="YYYY" type="text" name="year" id="year" />
-                    <label className="creation-card-form-area-subtitle" htmlFor="">Hora</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="00" type="text" name="hours" id="hours" />
-                    <label className="creation-card-form-area-subtitle" htmlFor="">Minuto</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="00" type="text" name="minutes" id="minutes" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="StartDay">Dia</label>
+                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="DD" type="text" name="StartDay" id="StartDay" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="StartMonth">Mes</label>
+                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="MM" type="text" name="StartMonth" id="StartMonth" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="StartYear">Año</label>
+                    <input className="creation-card-form-area-input" style={{width: '50px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="YYYY" type="text" name="StartYear" id="StartYear" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="StartHour">Hora</label>
+                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="00" type="text" name="StartHour" id="StartHour" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="StartMinutes">Minuto</label>
+                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="00" type="text" name="StartMinutes" id="StartMinutes" />
                   </div>
                 </div>
                 <div className="creation-card-form-area">
                   <h2 className="creation-card-form-area-title" htmlFor="nameCourse">Fecha de finalizacion</h2>
                   <div className="creation-card-form-area-options">
-                    <label className="creation-card-form-area-subtitle" htmlFor="">Dia</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="DD" type="text" name="day" id="day" />
-                    <label className="creation-card-form-area-subtitle" htmlFor="">Mes</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="MM" type="text" name="month" id="month" />
-                    <label className="creation-card-form-area-subtitle" htmlFor="">Año</label>
-                    <input className="creation-card-form-area-input" style={{width: '50px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="YYYY" type="text" name="year" id="year" />
-                    <label className="creation-card-form-area-subtitle" htmlFor="">Hora</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="00" type="text" name="hours" id="hours" />
-                    <label className="creation-card-form-area-subtitle" htmlFor="">Minuto</label>
-                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="00" type="text" name="minutes" id="minutes" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="EndDay">Dia</label>
+                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="DD" type="text" name="EndDay" id="EndDay" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="EndMonth">Mes</label>
+                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="MM" type="text" name="EndMonth" id="EndMonth" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="EndYear">Año</label>
+                    <input className="creation-card-form-area-input" style={{width: '50px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="YYYY" type="text" name="EndYear" id="EndYear" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="EndHour">Hora</label>
+                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="00" type="text" name="EndHour" id="EndHour" />
+                    <label className="creation-card-form-area-subtitle" htmlFor="EndMinutes">Minuto</label>
+                    <input className="creation-card-form-area-input" style={{width: '40px',  borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', textAlign: 'center', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} placeholder="00" type="text" name="EndMinutes" id="EndMinutes" />
                   </div>
                 </div>
                 <button className="creation-card-form-button" type="submit">Crear examen</button>

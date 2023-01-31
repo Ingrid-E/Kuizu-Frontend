@@ -16,7 +16,6 @@ const DashboardCourse = ({user}) => {
 
   const handleCourseInfo = async (courseId)=>{
    const courseData = await getCourseInfo(courseId)
-   console.log(courseData.data.course)
    setCourse(courseData.data.course)
   }
 

@@ -1,26 +1,30 @@
-import React, {useEffect, useState} from "react";
-import { LineRule, TestCard, LoadingSpinner} from "../../components";
+import React, { useEffect, useState } from "react";
+import { LineRule, TestCard, LoadingSpinner } from "../../components";
 import { useNavigate } from "react-router-dom";
-import { getCourseActivities, updateExamState } from "../../hooks/exam-hooks";
+import { getCourseActivities, getStudentCompletedExam, updateExamState } from "../../hooks/exam-hooks";
 import "./activities.css";
+import { getUserInfo } from "../../hooks/course-hooks";
 
-const Activities = ({data, window}) => {
+const Activities = ({ data, window }) => {
   const [loading, setLoading] = useState(false)
   const [activities, setActivities] = useState([])
-  useEffect(()=>{
+  //Only for teachers
+  const [completedActivities, setCompletedActivities] = useState([])
+
+  useEffect(() => {
     listActivities(data)
   }, [data])
   const navigate = useNavigate();
 
 
-  const listActivities = async(data)=>{
+  const listActivities = async (data) => {
     let allActivities = []
     setLoading(true)
-    await Promise.all(data.map(async (course)=>{
-      if(course._id != ""){
+    await Promise.all(data.map(async (course) => {
+      if (course._id != "") {
         await updateExamState(course._id)
         const courseActivities = await getCourseActivities(course._id)
-        const courseActivitiesData = courseActivities.data.data 
+        const courseActivitiesData = courseActivities.data.data
         courseActivitiesData.forEach(activity => {
           activity.course_name = course.name
           allActivities.push(activity)
@@ -33,22 +37,37 @@ const Activities = ({data, window}) => {
 
 
   const activitiesUnfilled = activities
-  .filter(activities => activities.state != "finished")
-  .map(activity =>
-    <div onClick={()=>navigate(`/dashboard/course/${activity.idCourse}/exam/${activity.idExam}`)}>
-      <TestCard data={activity} window={window}/>
-      <LineRule />
-    </div>
-  )
+    .filter(activities => activities.state != "finished")
+    .map(activity =>
+      <div onClick={() => navigate(`/dashboard/course/${activity.idCourse}/exam/${activity.idExam}`)}>
+        <TestCard data={activity} window={window} />
+        <LineRule />
+      </div>
+    )
 
   const activitiesFilled = activities
-  .filter(activities => activities.state == "finished")
-  .map(activity =>
-    <div onClick={()=>navigate(`/dashboard/course/${activity.idCourse}/exam/${activity.idExam}`)}>
-      <TestCard data={activity} window={window} type={"graded"}/>
-      <LineRule />
-    </div>
-  )
+    .filter(activities => activities.state == "finished")
+    .map(activity =>
+      <div onClick={() => navigate(`/dashboard/course/${activity.idCourse}/exam/${activity.idExam}`)}>
+        <TestCard data={activity} window={window} type={"graded"} />
+        <LineRule />
+      </div>
+    )
+
+
+  const studentCompleted = async (idExam) => {
+    const studentCompletedActivities = []
+    const studentList = await getStudentCompletedExam(idExam);
+    await Promise.all(
+      studentList.data.data.forEach(async (student) => {
+        const studentInfo = await getUserInfo(student.idStudent)
+        studentCompletedActivities.push(studentInfo)
+      })
+    )
+
+    setCompletedActivities(studentCompletedActivities)
+
+  }
 
   return (
     <div className="activities">
@@ -56,7 +75,7 @@ const Activities = ({data, window}) => {
         <h4 className="header">Actividades pendientes</h4>
         <div className="container">
           <div className="content">
-          {loading? <LoadingSpinner/>:<div></div>}
+            {loading ? <LoadingSpinner /> : <div></div>}
             {activitiesUnfilled}
           </div>
         </div>
@@ -65,7 +84,7 @@ const Activities = ({data, window}) => {
         <h4 className="header">Actividades entregadas</h4>
         <div className="container">
           <div className="content">
-          {loading? <LoadingSpinner/>:<div></div>}
+            {loading ? <LoadingSpinner /> : <div></div>}
             {activitiesFilled}
           </div>
         </div>
