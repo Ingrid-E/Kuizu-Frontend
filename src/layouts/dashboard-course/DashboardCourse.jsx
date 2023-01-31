@@ -45,7 +45,7 @@ const DashboardCourse = ({user}) => {
             >
               x
             </button>
-            <CreationView type={creationComponent} />
+            <CreationView type={creationComponent} exit={handleClick} />
           </div>
         ) : (
           <div className='empty'></div>

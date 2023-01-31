@@ -6,13 +6,14 @@ import LoadingSpinner from "../loading-spinner/LoadingSpinner";
 import { createCourse, getUserTypeCourse } from "../../hooks/course-hooks";
 import { createExam } from "../../hooks/exam-hooks";
 
-const CreationCard = ({ text }) => {
+const CreationCard = ({ text, exit }) => {
 
     const type = text;
     const [options, setOptions] = useState([])
     const [loading, setLoading] = useState(false)
     const [courses, setCourses] = useState([{}])
-    const [students, setStudents] = useState([]);
+    const [studentsList, setStudentsList] = useState([]);
+    const [mailStudent, setMailStudent] = useState('');
     const teacher_id = JSON.parse(Cookies.get('user')).type_id
 
     useEffect(()=>{
@@ -30,10 +31,10 @@ const CreationCard = ({ text }) => {
       setOptions(newOptions);
     }
 
-    function handleAddStudent(e) {
+    const handleAddStudent = (e) => {
       e.preventDefault();
-      students.push('hola');
-      setStudents(students);
+      setStudentsList([...studentsList, mailStudent]);
+      setMailStudent('');
     }
 
     const handleCreateCourse = async(e)=>{
@@ -106,10 +107,10 @@ const CreationCard = ({ text }) => {
                     <label className="creation-card-form-area-subtitle" htmlFor="courseEndYear">Año</label>
                     <input className="creation-card-form-area-input" style={{width: '50px'}} placeholder="YYYY" type="text" name="courseEndYear" id="courseEndYear" />
                   </div>
-                  <div className="creation-card-form-area">
-                    <label className="creation-card-form-area-subtitle" htmlFor="icon">Subir imagen curso</label>
-                    <input className="creation-card-form-area-inputfile" style={{width: '300px'}} type="file" name="icon" id="icon" />
-                  </div>
+                </div>
+                <div className="creation-card-form-area">
+                  <label className="creation-card-form-area-title" htmlFor="icon">Subir imagen curso</label>
+                  <input className="creation-card-form-area-input-file" style={{width: '300px'}} type="file" name="icon" id="icon" />
                 </div>
                 <button className="creation-card-form-button" type="submit">Crear curso</button>
               </form>
@@ -222,29 +223,24 @@ const CreationCard = ({ text }) => {
       return (
           <div className="creation-card">
             <h1 className="creation-card-title">Matriculando estudiante</h1>
-            <form className="creation-card-form" action="">
+            <form className="creation-card-form" onSubmit={handleAddStudent}>
               <div className="creation-card-form-area">
                 <label className="creation-card-form-area-title" htmlFor="mailStudent">Correo estudiante<span>*</span></label>
-                <input className="creation-card-form-area-input" style={{width: 'auto', textAlign: 'left'}} placeholder="Correo del estudiante" name="student-mail" id="student-mail" />
+                <input className="creation-card-form-area-input" style={{width: 'auto', textAlign: 'left'}} type='email' value={mailStudent} onChange={(e) => setMailStudent(e.target.value)} placeholder="Correo del estudiante" name="student-mail" id="student-mail" />
               </div>
               <div className="creation-card-form-area">
-                <label className="creation-card-form-area-title" htmlFor="mailStudent">Agregados</label>
-                <ul className="creation-card-form-area-option-list">
-                  {students.map((item) => (
-                    <li key={item.id} className='creation-card-form-area-option-list-option'>
-                      <div className="creation-card-form-area-option-list-option-content">
-                        <input className="creation-card-form-area-input" style={{flex: '1'}} type="text" name="question" id="question" />
-                        <div className="creation-card-form-area-option-list-option-content-check">
-                          <label htmlFor="questionCheck">Correcta</label>
-                          <input className="creation-card-form-area-input-checkbox" type="checkbox" name="questionCheck" id="questionCheck" />
-                        </div>
-                      </div>
+                <h1 className="creation-card-form-area-title">Agregados</h1>
+                <ul className="creation-card-form-area-students-list">
+                  {studentsList.map((item, index) => (
+                    <li key={index} className='creation-card-form-area-students-list-student'>
+                      <h1 className="creation-card-form-area-students-list-student-mail">{item}</h1>
                     </li>
                   ))}
                 </ul>
               </div>
-              <button className="creation-card-form-button" type="submit" onClick={(e) => handleAddStudent(e)}>Agregar estudiante</button>
+              <button className="creation-card-form-button-add" type="submit" onClick={(e) => handleAddStudent(e)}>Agregar estudiante</button>
             </form>
+            <button className="creation-card-form-button" onClick={(e) => exit(e)}>Terminar</button>
           </div>
         );
   }

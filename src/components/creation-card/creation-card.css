@@ -47,6 +47,40 @@
     box-shadow: 0px 5px 6px rgba(0, 0, 0, .15);
 }
 
+.creation-card-form-area-input-file {
+    border-radius: 4px;
+    color: #404462;
+    font-size: 1.2rem;
+    border: none;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+.creation-card-form-area-input-file::-webkit-file-upload-button {
+    visibility: hidden;
+    display: none;
+}
+
+.creation-card-form-area-input-file::before {
+    content: 'Selecciona una imagen';
+    width: auto;
+    background: #FFFFFF;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    text-align: center;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);
+  }
+
+  .creation-card-form-area-input-file:hover::before {
+    color: #000000;
+  }
+
 .creation-card-form-area-options {
     display: flex;
     justify-content: center;
@@ -69,6 +103,7 @@
     border: none;
     font-family: 'Poppins', sans-serif;
     font-size: 1.5rem;
+    font-weight: 500;
     padding: 10px 0px;
     margin-top: 10px;
     transition: .3s ease-in-out;
@@ -143,6 +178,29 @@
 	display: inline-block;
 	position: relative;
     margin-left: 10px;
+}
+
+.creation-card-form-area-students-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    row-gap: 10px;
+    overflow-y: auto;
+    max-height: 200px;
+}
+
+.creation-card-form-area-students-list-student {
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, .25);
+    padding: 5px 10px;
+}
+
+.creation-card-form-area-students-list-student-mail{
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
 }
 
 .creation-card-form-area-input-checkbox:active, .creation-card-form-area-input-checkbox:checked:active {
