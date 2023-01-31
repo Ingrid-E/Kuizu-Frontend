@@ -21,7 +21,7 @@ const DashboardHome = ({user_type, user_type_id}) => {
   return (
     <div className='dashboard-home'>
       <DashboardAverages data= {courses} userType = {user_type} userId={user_type_id}/>
-      <div className='sections'>
+      <div className='sections-home'>
         <Activities data={courses} window={"dashboard"} userType = {user_type} userId={user_type_id}/>
         <Courses data={courses}/>
       </div>

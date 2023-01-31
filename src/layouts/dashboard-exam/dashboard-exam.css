@@ -2,7 +2,7 @@
     width: auto;
     height: 100vh;
     max-height: 100vh;
-    position: relative;
+
     padding: 20px 40px;
     display: flex;
     flex-direction: column;
@@ -11,9 +11,35 @@
     overflow-y: auto;
 }
 
-@media (max-width: 600px) {
+.sections-exam {
+    width: 100%;
+    display: flex;
+    column-gap: 20px;
+    row-gap: 20px;
+    flex: 1;
+}
+
+.empty {
+    display: none;
+}
+
+.creation-view-container-active {
+    display: block;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  
+}
+
+@media screen and (max-width: 767px) {
     .dashboard-exam {
         height: auto;
-        padding: 20px;
+        padding: 10px 10px;
+        row-gap: 10px;
+    }
+
+    .sections-exam {
+        flex-direction: column-reverse;
+        row-gap: 10px;
     }
 }

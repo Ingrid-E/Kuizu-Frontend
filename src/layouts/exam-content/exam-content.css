@@ -25,7 +25,7 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
     overflow: hidden;
     position: relative;
-    transition: .3s ease-in-out;
+    
     cursor: pointer;
 }
 
@@ -47,11 +47,20 @@
     right: -50%;
     top: -25%;
     visibility: hidden;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.15);
+    
+    z-index: 1;
 }
 
 .active .exam-content-buttons-button-circle {
     right: -10%;
     visibility: visible;
+}
+
+.exam-content-buttons-button-text {
+    font-weight: 600;
+    color: #404462;
+    z-index: 2;
 }
 
 .exam-content-button-add {
@@ -74,12 +83,24 @@
     transform: scale(1.025);
 }
 
-@media (max-width: 600px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media screen and (max-width: 767px) {
     .exam-content {
         width: 100%;
     }
 
     .container {
         flex-basis: 225px;
+    }
+
+    .exam-content-buttons-button.active {
+        width: 50%;
+        min-width: 50%;
+    }
+    
+    .active .exam-content-buttons-button-circle {
+        right: -75%;
     }
 }

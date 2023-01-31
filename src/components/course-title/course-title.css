@@ -35,3 +35,21 @@
   text-align: center;
   z-index: 2;
 }
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media screen and (max-width: 767px) {
+
+  .course-title-circle:nth-child(1) {
+    left: -50px;
+  }
+  
+  .course-title-circle:nth-child(2) {
+    right: -50px;
+  }
+
+  .course-title-text {
+    font-size: 1.5rem;
+  }
+}

@@ -30,9 +30,97 @@
   column-gap: 20px;
   height: 100%;
   width: auto;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .navbar__menu-buttons-user.hide {
   opacity: 0;
+}
+
+.menu-button {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+}
+
+.menu-button .menu-button-line {
+  position: relative;
+  height: 5px;
+  width: 100%;
+  background-color: #8a96ff;
+  border-radius: 20px;
+  overflow: visible;
+  transition: 0.3s ease-in-out;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1001;
+}
+
+.menu-button .menu-button-line::before {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  background-color: #8a96ff;
+  border-radius: 20px;
+  top: -300%;
+  transition: inherit;
+}
+
+.menu-button .menu-button-line::after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  background-color: #8a96ff;
+  border-radius: 20px;
+  bottom: -300%;
+  transition: inherit;
+}
+
+.menu-button.active .menu-button-line {
+  background-color: transparent;
+}
+
+.menu-button.active .menu-button-line::before {
+  top: 0;
+  transform: rotate(-45deg);
+  transition-delay: 0.3s;
+}
+
+.menu-button.active .menu-button-line::after {
+  bottom: 0;
+  transform: rotate(45deg);
+  transition-delay: 0.3s;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media screen and (max-width: 767px) {
+  .navbar {
+    padding: 5px 10px;
+    min-height: 50px;
+    max-height: 50px;
+  }
+
+  .navbar-username {
+    display: none;
+  }
+
+  .menu-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .menu-button .menu-button-line::before {
+    top: -250%;
+  }
+
+  .menu-button .menu-button-line::after {
+    bottom: -250%;
+  }
 }

@@ -64,7 +64,7 @@ const SideBar = ({ user_img, firstname, lastname, rol, classText, hide}) => {
           <CreationView type={creationComponent} />
         </div>
       ) : (
-        <div></div>
+        <div className="empty"></div>
       )}
     </div>
   );
