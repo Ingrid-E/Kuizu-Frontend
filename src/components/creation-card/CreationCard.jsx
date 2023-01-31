@@ -130,7 +130,7 @@ const CreationCard = ({ text, exit }) => {
                 </div>
                 <div className="creation-card-form-area">
                   <label className="creation-card-form-area-title" htmlFor="idCourse">Curso<span>*</span></label>
-                  <select className="creation-card-form-area-input" style={{width: '300px', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="text" name="idCourse" id="idCourse" >
+                  <select className="creation-card-form-area-input" style={{width: 'auto', borderRadius: '4px', fontFamily: '"Poppins", sans-serif', fontSize: '1.2rem', border: 'none', padding: '2px 5px', boxShadow: '0px 5px 6px rgba(0, 0, 0, .15)'}} type="text" name="idCourse" id="idCourse" >
                     {courses.map((course)=>(
                         <option value={course._id}>{course.name}</option>
                     ))}
